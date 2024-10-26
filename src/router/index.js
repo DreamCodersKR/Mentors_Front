@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/views/Home.vue";
 import AboutPage from "@/views/About.vue";
 import Testpage from "@/views/Test.vue";
+import SignUp from "@/views/SignUp.vue";
 
 const routes = [
   {
@@ -19,10 +20,15 @@ const routes = [
     name: "Test",
     component: Testpage,
   },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // Vue Router 4 방식으로 history 설정
+  history: createWebHistory(process.env.VUE_APP_BASE_URL), // Vue Router 4 방식으로 history 설정
   routes,
 });
 
