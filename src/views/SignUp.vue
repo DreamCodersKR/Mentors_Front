@@ -6,13 +6,13 @@
     <!-- 회원유형 -->
     <div class="form-group">
       <label>회원유형 *</label>
-      <div class="checkbox-group">
+      <div class="radio-group">
         <label
-          ><input type="checkbox" v-model="memberType" value="주니어" />
+          ><input type="radio" v-model="memberType" value="주니어" />
           주니어</label
         >
         <label
-          ><input type="checkbox" v-model="memberType" value="시니어" />
+          ><input type="radio" v-model="memberType" value="시니어" />
           시니어</label
         >
       </div>
@@ -60,6 +60,20 @@
       />
     </div>
 
+    <!-- 비밀번호 확인 -->
+    <div class="form-group">
+      <label for="confirmPassword">비밀번호 확인 *</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        v-model="confirmPassword"
+        placeholder="비밀번호를 한번 더 입력해주세요."
+      />
+      <p v-if="passwordMismatch" class="error-msg">
+        비밀번호가 일치하지 않습니다.
+      </p>
+    </div>
+
     <!-- 생년월일 -->
     <div class="form-group">
       <label for="birthdate">생년월일 *</label>
@@ -79,13 +93,27 @@
 export default {
   data() {
     return {
-      memberType: [],
+      memberType: "", // 회원유형을 하나만 선택할 수 있도록 수정
       gender: "",
       email: "",
       password: "",
+      confirmPassword: "",
       name: "",
       birthdate: "",
+      passwordMismatch: false, // 비밀번호 불일치 여부 확인을 위한 변수
     };
+  },
+  methods: {
+    // 비밀번호와 비밀번호 확인이 일치하는지 확인
+    checkPasswordMatch() {
+      if (this.password !== this.confirmPassword) {
+        this.passwordMismatch = true; // 비밀번호가 일치하지 않을 경우
+      } else {
+        this.passwordMismatch = false; // 비밀번호가 일치할 경우
+        // 비밀번호가 일치하면 추가적인 회원가입 처리 로직을 여기에 추가
+        alert("회원가입 완료");
+      }
+    },
   },
 };
 </script>
