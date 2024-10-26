@@ -6,10 +6,12 @@
 
     <div class="contWrap" :class="{ 'is-open': isSidebarOpen }">
       <header class="header">
-        <h1 class="title">멘토스 메인페이지용</h1>
+        <h1 class="title"></h1>
         <div class="auth-buttons">
           <button class="login-btn">로그인</button>
-          <button class="signup-btn">회원가입</button>
+          <router-link to="/signup"
+            ><button class="signup-btn">회원가입</button></router-link
+          >
         </div>
       </header>
 
