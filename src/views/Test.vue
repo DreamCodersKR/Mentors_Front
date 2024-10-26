@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>테스트 페이지 입니다</h1>
-    <router-link to="/">Go to Home Page</router-link><br />
     <button style="margin-top: 10px" @click="sendPostTestMessage">
       통신테스트
     </button>
