@@ -54,7 +54,7 @@ export default {
 
 .left-menu {
   width: 70px;
-  background-color: #2c3e50;
+  /* background-color: #2c3e50; */
   height: 100vh;
   position: relative;
   transition: width 0.3s ease;
@@ -101,13 +101,26 @@ button {
 }
 
 .login-btn {
-  background-color: #5d6d7e; /* 네이비 블루 */
+  background-color: #8d8df5;
   color: white;
+}
+
+.login-btn:hover {
+  background-color: #6a6ad5; /* 호버 시 어두운 보라색 */
 }
 
 .signup-btn {
   background-color: #d67367; /* 그레이시 핑크 */
   color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #c65d5d; /* 호버 시 더 어두운 그레이시 핑크 */
 }
 
 button:hover {

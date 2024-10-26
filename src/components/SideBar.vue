@@ -67,7 +67,7 @@ export default {
 .sidebar {
   width: 70px;
   height: 100vh;
-  background-color: #2c3e50;
+  background-color: #8d8df5;
   position: fixed;
   left: 0;
   top: 0;
@@ -142,6 +142,6 @@ a {
 }
 
 a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* 호버 시 배경색 변경 */
+  background-color: #6a6ad5; /* 호버 시 배경색 변경 */
 }
 </style>
