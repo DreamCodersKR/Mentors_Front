@@ -1,6 +1,10 @@
 <template>
   <div class="signup-container">
-    <h1 class="signup-title">Mentors, <span>AI 기반 멘토링</span></h1>
+    <div class="logo-container" @click="goToHome">
+      <img src="@/assets/logo.png" alt="Mentors Logo" class="logo" />
+      <h1 class="logo-text">Mentors</h1>
+    </div>
+    <!-- <h1 class="signup-title">Mentors, <span>AI 기반 멘토링</span></h1> -->
     <p class="signup-subtitle">이 페이지만 작성하면 회원가입이 끝나요!</p>
 
     <!-- 회원유형 -->
@@ -90,6 +94,8 @@
 </template>
 
 <script>
+// 해야할 작업 : 유효성검사, API 로직
+
 export default {
   data() {
     return {
@@ -114,6 +120,9 @@ export default {
         alert("회원가입 완료");
       }
     },
+    goToHome() {
+      this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
+    },
   },
 };
 </script>
@@ -126,7 +135,31 @@ export default {
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.logo {
+  width: 50px; /* 로고 크기 */
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  font-family: "Arial", sans-serif;
 }
 
 .signup-title {
@@ -143,11 +176,12 @@ export default {
 .signup-subtitle {
   font-size: 14px;
   color: #8d8df5;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 label {

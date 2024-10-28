@@ -14,7 +14,9 @@
           <h1 class="logo-text">Mentors</h1>
         </div>
         <div class="auth-buttons">
-          <button class="login-btn">로그인</button>
+          <router-link to="/login">
+            <button class="login-btn">로그인</button>
+          </router-link>
           <router-link to="/signup">
             <button class="signup-btn">회원가입</button>
           </router-link>
@@ -117,7 +119,7 @@ export default {
 }
 
 button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -135,7 +137,6 @@ button {
 .signup-btn {
   background-color: #d67367;
   color: white;
-  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
