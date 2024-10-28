@@ -175,7 +175,7 @@ export default {
 .login-btn {
   width: 100%;
   padding: 12px;
-  background-color: #a7bdfb;
+  background-color: #8d8df5;
   color: white;
   border: none;
   border-radius: 8px;
