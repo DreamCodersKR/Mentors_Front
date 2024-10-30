@@ -135,12 +135,12 @@ export default {
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
+  margin-top: 50px;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 82vh;
 }
 
 .logo-container {
