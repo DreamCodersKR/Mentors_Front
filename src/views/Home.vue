@@ -28,12 +28,14 @@
         <router-view />
         <!-- 이곳에서 페이지 전환이 일어남 -->
       </div>
+      <FooterCom />
     </div>
   </div>
 </template>
 
 <script>
 import SideBar from "@/components/SideBar.vue";
+import FooterCom from "@/components/Footer.vue";
 
 export default {
   name: "MainPage",
@@ -52,6 +54,7 @@ export default {
   },
   components: {
     SideBar,
+    FooterCom,
   },
 };
 </script>
