@@ -38,6 +38,7 @@
 import MenuButton from "@/components/MenuButton.vue";
 
 export default {
+  name: "SideBar",
   components: {
     MenuButton,
   },

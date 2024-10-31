@@ -2,7 +2,7 @@
   <div class="main-container">
     <!-- 사이드바 영역 -->
     <div class="left-menu" :class="{ 'is-open': isSidebarOpen }">
-      <Sidebar @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
+      <SideBar @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
     </div>
 
     <!-- 컨텐츠 영역 -->
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Sidebar from "@/components/SideBar.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
   name: "MainPage",
@@ -51,7 +51,7 @@ export default {
     },
   },
   components: {
-    Sidebar,
+    SideBar,
   },
 };
 </script>
