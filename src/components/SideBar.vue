@@ -11,26 +11,49 @@
       <ul v-if="isSidebarOpen">
         <!-- 카테고리 트리 -->
         <li class="menu-item">
-          <div @click="toggleCategory" class="menu-title">카테고리</div>
+          <div @click="toggleCategory" class="menu-title">
+            <iconCategories />카테고리
+          </div>
           <transition name="categoryEffect">
             <ul v-if="isCategoryOpen" class="sub-menu">
-              <li><router-link to="/">학업/교육</router-link></li>
-              <li><router-link to="/">경력/직업</router-link></li>
-              <li><router-link to="/">IT/기술</router-link></li>
-              <li><router-link to="/">자기계발&멘탈케어</router-link></li>
-              <li><router-link to="/">금융/경제</router-link></li>
-              <li><router-link to="/">예술/취미</router-link></li>
-              <li><router-link to="/">라이프 스타일</router-link></li>
+              <li>
+                <router-link to="/"><iconEducation />학업/교육</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconCarrier />취업/커리어</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconIT />IT/전문기술</router-link>
+              </li>
+              <li>
+                <router-link to="/"
+                  ><iconImprovement />개인성장/자기관리</router-link
+                >
+              </li>
+              <li>
+                <router-link to="/"><iconEconomy />금융/경제</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconArt />예술/취미</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconEtc />기타</router-link>
+              </li>
             </ul>
           </transition>
         </li>
         <li class="menu-item">
-          <router-link to="/about">채팅목록</router-link>
+          <router-link to="/premium">프리미엄 멘토링</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/test">자유게시판</router-link>
+          <router-link to="/test"><iconChatting />채팅목록</router-link>
         </li>
-        <li class="menu-item"><router-link to="/about">About</router-link></li>
+        <li class="menu-item">
+          <router-link to="/test"><iconBoard />자유게시판</router-link>
+        </li>
+        <li class="menu-item">
+          <router-link to="/about"><iconAbout />About</router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -38,11 +61,37 @@
 
 <script>
 import MenuButton from "@/components/MenuButton.vue";
+//icon------------------------------
+import iconArt from "@/components/icons/iconArt.vue";
+import iconCarrier from "@/components/icons/iconCarrier.vue";
+import iconCategories from "@/components/icons/iconCategories.vue";
+import iconEconomy from "@/components/icons/iconEconomy.vue";
+import iconEducation from "@/components/icons/iconEducation.vue";
+import iconEtc from "@/components/icons/iconEtc.vue";
+import iconImprovement from "@/components/icons/iconImprovement.vue";
+import iconIT from "@/components/icons/iconIT.vue";
+import iconChatting from "@/components/icons/iconChatting.vue";
+import iconBoard from "@/components/icons/iconBoard.vue";
+import iconAbout from "@/components/icons/iconAbout.vue";
+
+//-----------------------------------
 
 export default {
   name: "SideBar",
   components: {
     MenuButton,
+    //sidebar icon 컴포넌트
+    iconArt,
+    iconCarrier,
+    iconCategories,
+    iconEconomy,
+    iconEducation,
+    iconEtc,
+    iconImprovement,
+    iconIT,
+    iconChatting,
+    iconBoard,
+    iconAbout,
   },
   props: {
     isSidebarOpen: {
@@ -68,10 +117,43 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  display: block;
+  padding: 10px;
+  border-radius: 8px; /* 링크도 둥글게 */
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  background-color: #ddefff33; /* 호버 시 배경색 변경 */
+}
+
+svg {
+  margin-right: 10px; /* 카테고리 내 아이콘 오른쪽마진 */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px; /* 버튼과 메뉴 간격 */
+}
+
+li {
+  margin-bottom: 10px;
+}
+
 .sidebar {
   width: 70px;
   height: 100vh;
-  background-color: #8d8df5;
+  background: linear-gradient(
+    #a9d6fb,
+    #b4beff,
+    #aea9e3
+  ); /*사이드바색상 그라디언트(별) */
   position: fixed;
   left: 0;
   top: 0;
@@ -99,18 +181,13 @@ export default {
   text-align: center;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px; /* 버튼과 메뉴 간격 */
-}
-
 .menu-item {
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 8px; /* 둥근 모서리 */
-  background-color: rgba(255, 255, 255, 0.1); /* 가벼운 배경색 추가 */
+  background-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
+  color: black;
 }
 
 .menu-item:hover {
@@ -118,9 +195,12 @@ ul {
 }
 
 .menu-title {
+  color: black;
   font-weight: bold;
-  color: #fff;
   cursor: pointer;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .sub-menu {
@@ -128,7 +208,6 @@ ul {
   padding-left: 10px;
   border-left: 2px solid rgba(255, 255, 255, 0.2); /* 트리 메뉴를 구분하는 선 */
   text-align: left;
-  color: #fff;
 }
 
 .categoryEffect-enter-from {
@@ -139,22 +218,5 @@ ul {
 }
 .categoryEffect-enter-to {
   opacity: 1;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  padding: 10px;
-  border-radius: 8px; /* 링크도 둥글게 */
-  transition: background-color 0.3s ease;
-}
-
-a:hover {
-  background-color: #6a6ad5; /* 호버 시 배경색 변경 */
 }
 </style>

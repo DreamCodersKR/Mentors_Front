@@ -31,7 +31,8 @@ export default {
 
 <style scoped>
 .menu-toggle {
-  background-color: #8d8df5;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background : #A9D4FB;
   color: #fff;
   border: none;
   padding: 15px;
@@ -47,7 +48,7 @@ export default {
 }
 
 .menu-toggle:hover {
-  background-color: #6a6ad5;
+  background-color: #99CEFF;
 }
 
 .menu-toggle:focus {

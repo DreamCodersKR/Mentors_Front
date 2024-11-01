@@ -28,7 +28,7 @@ export default {
       // API 호출
       sendPostTestData({ message: "goodJob" })
         .then((response) => {
-          console.log("Response : ", response.data);
+          console.log("Response : ", response);
         })
         .catch((error) => {
           console.error("Error: ", error);
@@ -37,7 +37,7 @@ export default {
     sendGetTestMessage() {
       sendGetTestData(this.inputValue)
         .then((response) => {
-          console.log("Response : ", response.data);
+          console.log("Response : ", response);
         })
         .catch((error) => {
           console.error("에러남 : ", error);
