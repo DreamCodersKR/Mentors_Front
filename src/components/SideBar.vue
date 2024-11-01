@@ -1,4 +1,5 @@
 <template>
+  
   <div :class="['sidebar', { 'is-open': isSidebarOpen }]">
     <!-- MenuButton 컴포넌트 -->
     <MenuButton
@@ -119,8 +120,9 @@ export default {
 </script>
 
 <style scoped>
+
 svg{
-  margin-left : 20px;
+  margin-left : 15px;
   margin-right: 5px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -214,6 +216,7 @@ li {
 }
 
 .menu-item {
+  font-size: 18px;
   text-align : left;
   margin-bottom: 20px;
   padding: 10px;
@@ -230,6 +233,7 @@ li {
 .menu-title {
   color: #7980AB;
   font-weight: bold;
+  font-size: 18px;
   cursor: pointer;
   background-color: white;
   border-radius: 8px;
@@ -241,6 +245,7 @@ li {
 }
 
 .sub-menu {
+  font-size: 16px;
   margin-left: 20px; /* 하위 메뉴 들여쓰기 */
   padding-left: 10px;
   border-left: 2px solid rgba(255, 255, 255, 0.2); /* 트리 메뉴를 구분하는 선 */
