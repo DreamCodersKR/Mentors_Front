@@ -43,7 +43,7 @@
           </transition>
         </li>
         <li class="menu-item">
-          <router-link to="/premium">프리미엄 멘토링</router-link>
+          <router-link to="/premium"><iconPremium/>프리미엄 멘토링</router-link>
         </li>
         <li class="menu-item">
           <router-link to="/test"><iconChatting />채팅목록</router-link>
@@ -73,6 +73,7 @@ import iconIT from "@/components/icons/iconIT.vue";
 import iconChatting from "@/components/icons/iconChatting.vue";
 import iconBoard from "@/components/icons/iconBoard.vue";
 import iconAbout from "@/components/icons/iconAbout.vue";
+import iconPremium from "@/components/icons/iconPremium.vue";
 
 //-----------------------------------
 
@@ -92,6 +93,7 @@ export default {
     iconChatting,
     iconBoard,
     iconAbout,
+    iconPremium,
   },
   props: {
     isSidebarOpen: {
@@ -117,13 +119,21 @@ export default {
 </script>
 
 <style scoped>
+svg{
+  margin-left : 20px;
+  margin-right: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  margin-top: -5px;
+}
 a {
   text-decoration: none;
-  color: black;
+  color: #7980AB;
   font-weight: bold;
   background-color: white;
   display: block;
-  padding: 10px;
+  padding: 16px;
   border-radius: 8px; /* 링크도 둥글게 */
   transition: background-color 0.3s ease;
 }
@@ -132,9 +142,7 @@ a:hover {
   background-color: #ddefff33; /* 호버 시 배경색 변경 */
 }
 
-svg {
-  margin-right: 10px; /* 카테고리 내 아이콘 오른쪽마진 */
-}
+
 
 ul {
   list-style: none;
@@ -198,6 +206,7 @@ li {
 }
 
 .menu-item {
+  text-align : left;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 8px; /* 둥근 모서리 */
@@ -211,12 +220,16 @@ li {
 }
 
 .menu-title {
-  color: black;
+  color: #7980AB;
   font-weight: bold;
   cursor: pointer;
   background-color: white;
   border-radius: 8px;
-  padding: 10px;
+  padding: 16px;
+  transition: background-color 0.3s ease;
+}
+.menu-title:hover{
+  background-color: rgba(255, 255, 255, 0.2); /* 호버 시 배경색 변경 */
 }
 
 .sub-menu {
