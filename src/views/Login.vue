@@ -34,7 +34,7 @@
 
     <!-- 로그인 버튼 -->
     <button class="login-btn" @click="login">로그인</button>
-    <button class="login-btn-kakao" @click="kakaoLogin">카카오로 로그인</button>
+    <!-- <button class="login-btn-kakao" @click="kakaoLogin">카카오로 로그인</button> -->
 
     <!-- 하단 링크들 -->
     <div class="footer-links">
@@ -59,15 +59,15 @@ export default {
       rememberMe: true,
     };
   },
-  mounted() {
-    // Kakao SDK 초기화
-    if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init("0873b78033e98d33faf4b7afe61e0039"); // 여기에 JavaScript 키 입력
-      console.log("Kakao SDK Initialized:", window.Kakao.isInitialized());
-    } else {
-      console.error("Kakao SDK 로드 실패");
-    }
-  },
+  // mounted() {
+  //   // Kakao SDK 초기화
+  //   if (window.Kakao && !window.Kakao.isInitialized()) {
+  //     window.Kakao.init("0873b78033e98d33faf4b7afe61e0039"); // 여기에 JavaScript 키 입력
+  //     console.log("Kakao SDK Initialized:", window.Kakao.isInitialized());
+  //   } else {
+  //     console.error("Kakao SDK 로드 실패");
+  //   }
+  // },
   methods: {
     login() {
       if (!this.email || !this.password) {
@@ -82,23 +82,23 @@ export default {
         rememberMe: this.rememberMe,
       });
     },
-    kakaoLogin() {
-      console.log(
-        "window.Kakao.Auth 값 : ",
-        window.Kakao.Auth.getAccessToken()
-      );
+    // kakaoLogin() {
+    //   console.log(
+    //     "window.Kakao.Auth 값 : ",
+    //     window.Kakao.Auth.getAccessToken()
+    //   );
 
-      // 카카오 로그아웃 (기존 세션 초기화)
-      if (window.Kakao.Auth.getAccessToken() !== null) {
-        window.Kakao.Auth.logout(() => {
-          console.log("기존 카카오 세션 초기화");
-        });
-      }
+    //   // 카카오 로그아웃 (기존 세션 초기화)
+    //   if (window.Kakao.Auth.getAccessToken() !== null) {
+    //     window.Kakao.Auth.logout(() => {
+    //       console.log("기존 카카오 세션 초기화");
+    //     });
+    //   }
 
-      // 새 창에서 카카오 로그인 호출
-      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=0873b78033e98d33faf4b7afe61e0039&redirect_uri=http://localhost:8081/kakaoLogin&response_type=code`;
-      window.open(kakaoAuthUrl, "KakaoLogin", "width=600,height=600");
-    },
+    //   // 새 창에서 카카오 로그인 호출
+    //   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=0873b78033e98d33faf4b7afe61e0039&redirect_uri=http://localhost:8081/kakaoLogin&response_type=code`;
+    //   window.open(kakaoAuthUrl, "KakaoLogin", "width=600,height=600");
+    // },
 
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
@@ -212,7 +212,7 @@ export default {
   margin-top: 20px;
 }
 
-.login-btn-kakao {
+/* .login-btn-kakao {
   width: 100%;
   padding: 12px;
   background-color: yellow;
@@ -222,7 +222,7 @@ export default {
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
-}
+} */
 
 .login-btn:hover {
   background-color: #7582d5;
