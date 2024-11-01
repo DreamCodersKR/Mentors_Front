@@ -5,7 +5,6 @@
       <h2>자유게시판</h2>
     </div>
 
-    <!-- 게시글 목록 -->
     <ul class="post-list">
       <li v-for="post in posts" :key="post.id" class="post-item">
         <div class="post-header">
@@ -21,7 +20,6 @@
       </li>
     </ul>
 
-    <!-- 페이지네이션 -->
     <div class="pagination">
       <button
         v-for="page in totalPages"
@@ -32,7 +30,6 @@
         {{ page }}
       </button>
     </div>
-    <!-- 글쓰기 버튼 -->
     <button class="write-button" @click="goToWritePage">글쓰기</button>
   </div>
 </template>
