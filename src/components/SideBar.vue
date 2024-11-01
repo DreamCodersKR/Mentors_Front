@@ -58,6 +58,7 @@ export default {
   methods: {
     toggleSidebar() {
       this.$emit("toggle-sidebar");
+      this.isCategoryOpen = false;
     },
     toggleCategory() {
       this.isCategoryOpen = !this.isCategoryOpen; // 카테고리 트리 토글
