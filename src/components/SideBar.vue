@@ -14,33 +14,33 @@
           <div @click="toggleCategory" class="menu-title">
             <iconCategories />카테고리
           </div>
-          <!-- <transition name="categoryEffect"> -->
-          <ul v-if="isCategoryOpen" class="sub-menu">
-            <li>
-              <router-link to="/"><iconEducation />학업/교육</router-link>
-            </li>
-            <li>
-              <router-link to="/"><iconCarrier />취업/커리어</router-link>
-            </li>
-            <li>
-              <router-link to="/"><iconIT />IT/전문기술</router-link>
-            </li>
-            <li>
-              <router-link to="/"
-                ><iconImprovement />개인성장/자기관리</router-link
-              >
-            </li>
-            <li>
-              <router-link to="/"><iconEconomy />금융/경제</router-link>
-            </li>
-            <li>
-              <router-link to="/"><iconArt />예술/취미</router-link>
-            </li>
-            <li>
-              <router-link to="/"><iconEtc />기타</router-link>
-            </li>
-          </ul>
-          <!-- </transition> -->
+          <transition name="categoryEffect">
+            <ul v-if="isCategoryOpen" class="sub-menu">
+              <li>
+                <router-link to="/"><iconEducation />학업/교육</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconCarrier />취업/커리어</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconIT />IT/전문기술</router-link>
+              </li>
+              <li>
+                <router-link to="/"
+                  ><iconImprovement />개인성장/자기관리</router-link
+                >
+              </li>
+              <li>
+                <router-link to="/"><iconEconomy />금융/경제</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconArt />예술/취미</router-link>
+              </li>
+              <li>
+                <router-link to="/"><iconEtc />기타</router-link>
+              </li>
+            </ul>
+          </transition>
         </li>
         <li class="menu-item">
           <router-link to="/premium">프리미엄 멘토링</router-link>
@@ -200,6 +200,7 @@ li {
   cursor: pointer;
   background-color: white;
   border-radius: 8px;
+  padding: 10px;
 }
 
 .sub-menu {
@@ -209,7 +210,7 @@ li {
   text-align: left;
 }
 
-/* .categoryEffect-enter-from {
+.categoryEffect-enter-from {
   opacity: 0;
 }
 .categoryEffect-enter-active {
@@ -217,5 +218,5 @@ li {
 }
 .categoryEffect-enter-to {
   opacity: 1;
-} */
+}
 </style>
