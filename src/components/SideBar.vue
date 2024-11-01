@@ -25,10 +25,13 @@
           </transition>
         </li>
         <li class="menu-item">
-          <router-link to="/about">채팅목록</router-link>
+          <router-link to="/premium">프리미엄 멘토링</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/test">자유게시판</router-link>
+          <router-link to="/test">채팅목록</router-link>
+        </li>
+        <li class="menu-item">
+          <router-link to="/board">자유게시판</router-link>
         </li>
         <li class="menu-item"><router-link to="/about">About</router-link></li>
       </ul>
