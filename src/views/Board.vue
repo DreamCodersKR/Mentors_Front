@@ -1,6 +1,9 @@
 <template>
   <div class="board-container">
-    <h2>자유게시판</h2>
+    <div class="board-title">
+      <icon-board />
+      <h2>자유게시판</h2>
+    </div>
 
     <!-- 게시글 목록 -->
     <ul class="post-list">
@@ -35,23 +38,17 @@
 </template>
 
 <script>
+import boards from "@/datas/BoardExample";
+import iconBoard from "@/components/icons/iconBoard.vue";
+
 export default {
   name: "BoardPage",
+  components: {
+    iconBoard,
+  },
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          title: "[공지] 자유 게시판 이용 안내",
-          date: "2024-11-01",
-          author: "운영팀",
-          content: "모두가 이용하는 자유게시판입니다. 매너를 지켜주세요!",
-          views: 13,
-          comments: 7,
-          likes: 7,
-        },
-        // 다른 게시글 데이터 추가
-      ],
+      posts: boards,
       currentPage: 1, // 현재페이지 1일때,
       totalPages: 4, // 총 페이지 수가 4일때,
     };
@@ -75,10 +72,15 @@ export default {
   padding: 20px;
 }
 
+.board-title {
+  display: flex;
+}
+
 h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 .write-button {
@@ -89,6 +91,7 @@ h2 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .post-list {
