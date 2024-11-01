@@ -1,30 +1,41 @@
 <template>
   <div class="main-container">
+    <!-- 사이드바 영역 -->
     <div class="left-menu" :class="{ 'is-open': isSidebarOpen }">
-      <Sidebar @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
+      <SideBar @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
     </div>
 
+    <!-- 컨텐츠 영역 -->
     <div class="contWrap" :class="{ 'is-open': isSidebarOpen }">
+      <!-- 헤더 영역 -->
       <header class="header">
-        <h1 class="title"></h1>
+        <div class="logo-container" @click="goToHome">
+          <img src="@/assets/logo.png" alt="Mentors Logo" class="logo" />
+          <h1 class="logo-text">Mentors</h1>
+        </div>
         <div class="auth-buttons">
-          <button class="login-btn">로그인</button>
-          <router-link to="/signup"
-            ><button class="signup-btn">회원가입</button></router-link
-          >
+          <router-link to="/login">
+            <button class="login-btn">로그인</button>
+          </router-link>
+          <router-link to="/signup">
+            <button class="signup-btn">회원가입</button>
+          </router-link>
         </div>
       </header>
 
+      <!-- 여기에 라우터 뷰를 넣어서 컨텐츠가 변환되도록 함 -->
       <div class="content">
-        <router-link to="/about">Go to About Page</router-link><br />
-        <router-link to="/test">테스트 페이지 gaboja~</router-link><br />
+        <router-view />
+        <!-- 이곳에서 페이지 전환이 일어남 -->
       </div>
+      <FooterCom />
     </div>
   </div>
 </template>
 
 <script>
-import Sidebar from "@/components/SideBar.vue";
+import SideBar from "@/components/SideBar.vue";
+import FooterCom from "@/components/Footer.vue";
 
 export default {
   name: "MainPage",
@@ -37,9 +48,13 @@ export default {
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen; // 사이드바 열림/닫힘 상태 토글
     },
+    goToHome() {
+      this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
+    },
   },
   components: {
-    Sidebar,
+    SideBar,
+    FooterCom,
   },
 };
 </script>
@@ -54,7 +69,6 @@ export default {
 
 .left-menu {
   width: 70px;
-  /* background-color: #2c3e50; */
   height: 100vh;
   position: relative;
   transition: width 0.3s ease;
@@ -77,15 +91,29 @@ export default {
   height: 60px;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
-  padding: 10px;
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 로고와 버튼을 좌우로 배치 */
   align-items: center;
 }
 
-.title {
-  margin: 0;
-  font-size: 24px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-left: -16px; /* 왼쪽 여백을 줄이기 */
+  text-decoration: none; /* 밑줄 제거 */
+  cursor: pointer;
+}
+
+.logo {
+  width: 60px;
+}
+
+.logo-text {
+  font-family: "Arial", sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
 }
 
 .auth-buttons {
@@ -94,7 +122,7 @@ export default {
 }
 
 button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -106,21 +134,19 @@ button {
 }
 
 .login-btn:hover {
-  background-color: #6a6ad5; /* 호버 시 어두운 보라색 */
+  background-color: #6a6ad5;
 }
 
 .signup-btn {
-  background-color: #d67367; /* 그레이시 핑크 */
+  background-color: #d67367;
   color: white;
-  border: none;
-  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .signup-btn:hover {
-  background-color: #c65d5d; /* 호버 시 더 어두운 그레이시 핑크 */
+  background-color: #c65d5d;
 }
 
 button:hover {
