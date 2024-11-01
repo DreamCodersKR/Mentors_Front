@@ -32,7 +32,7 @@
           <router-link to="/test"><iconChatting/>채팅목록</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/test">자유게시판</router-link>
+          <router-link to="/test"><iconBoard/>자유게시판</router-link>
         </li>
         <li class="menu-item"><router-link to="/about"><iconAbout/>About</router-link></li>
       </ul>
