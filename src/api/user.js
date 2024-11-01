@@ -26,3 +26,8 @@ export function sendGetTestData(inputValue) {
 export function loginUser(credentials) {
   return apiClient.post("/login", credentials);
 }
+
+// 회원가입 요청
+export function sendPostJoin(data) {
+  return apiClient.post("/MemberJoin",data);
+}

@@ -89,13 +89,13 @@
       />
     </div>
 
-    <button class="submit-btn">회원가입 완료!</button>
+    <button class="submit-btn" @click="sendJoin">회원가입 완료!</button>
   </div>
 </template>
 
 <script>
 // 해야할 작업 : 유효성검사, API 로직
-
+import { sendPostJoin } from "../api/user";
 export default {
   data() {
     return {
@@ -123,6 +123,24 @@ export default {
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
     },
+    sendJoin(){
+      sendPostJoin({
+        memberType:this.memberType,
+        gender:this.gender,
+        email:this.email,
+        password:this.password,
+        confirmPassword:this.confirmPassword,
+        name:this.name,
+        birthdate:this.birthdate,
+        passwordMismatch:this.passwordMismatch
+      })
+        .then((response) => {
+          console.log("Response : ", response.data);
+        })
+        .catch((error) => {
+          console.error("에러남 : ", error);
+        });
+    }
   },
 };
 </script>
