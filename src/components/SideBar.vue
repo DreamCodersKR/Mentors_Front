@@ -12,15 +12,17 @@
         <!-- 카테고리 트리 -->
         <li class="menu-item">
           <div @click="toggleCategory" class="menu-title">카테고리</div>
-          <ul v-if="isCategoryOpen" class="sub-menu">
-            <li><router-link to="/">학업/교육</router-link></li>
-            <li><router-link to="/">경력/직업</router-link></li>
-            <li><router-link to="/">IT/기술</router-link></li>
-            <li><router-link to="/">자기계발&멘탈케어</router-link></li>
-            <li><router-link to="/">금융/경제</router-link></li>
-            <li><router-link to="/">예술/취미</router-link></li>
-            <li><router-link to="/">라이프 스타일</router-link></li>
-          </ul>
+          <transition name="categoryEffect">
+            <ul v-if="isCategoryOpen" class="sub-menu">
+              <li><router-link to="/">학업/교육</router-link></li>
+              <li><router-link to="/">경력/직업</router-link></li>
+              <li><router-link to="/">IT/기술</router-link></li>
+              <li><router-link to="/">자기계발&멘탈케어</router-link></li>
+              <li><router-link to="/">금융/경제</router-link></li>
+              <li><router-link to="/">예술/취미</router-link></li>
+              <li><router-link to="/">라이프 스타일</router-link></li>
+            </ul>
+          </transition>
         </li>
         <li class="menu-item">
           <router-link to="/about">채팅목록</router-link>
@@ -126,7 +128,16 @@ ul {
   border-left: 2px solid rgba(255, 255, 255, 0.2); /* 트리 메뉴를 구분하는 선 */
   text-align: left;
   color: #fff;
-  transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.categoryEffect-enter-from {
+  opacity: 0;
+}
+.categoryEffect-enter-active {
+  transition: all 1s;
+}
+.categoryEffect-enter-to {
+  opacity: 1;
 }
 
 li {
