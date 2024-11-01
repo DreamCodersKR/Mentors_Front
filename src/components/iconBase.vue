@@ -22,7 +22,5 @@ export default {
 </script>
 
 <style>
-svg{
-    margin : 10px;
-}
+
 </style>
