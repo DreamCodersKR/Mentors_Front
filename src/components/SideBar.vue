@@ -27,7 +27,7 @@
               </li>
               <li>
                 <router-link to="/"
-                  ><iconImprovement />개인성장/자기관리</router-link
+                  ><iconImprovement />성장/자기관리</router-link
                 >
               </li>
               <li>
@@ -49,7 +49,7 @@
           <router-link to="/test"><iconChatting />채팅목록</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/test"><iconBoard />자유게시판</router-link>
+          <router-link to="/board"><iconBoard />자유게시판</router-link>
         </li>
         <li class="menu-item">
           <router-link to="/about"><iconAbout />About</router-link>
@@ -145,6 +145,21 @@ ul {
 li {
   margin-bottom: 10px;
 }
+/* 커스텀 스크롤바 만들기 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a9d6fb;
+  border: 2px solid #b4beff;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aea9e3;
+}
 
 .sidebar {
   width: 70px;
@@ -161,6 +176,7 @@ li {
   padding: 20px 10px; /* padding 추가 */
   justify-content: center; /* 사이드바 안의 항목들을 세로로 중앙 정렬 */
   align-items: center; /* 좌우 중앙 정렬 */
+  overflow-y: auto;
 }
 
 .sidebar.is-open {
