@@ -127,6 +127,14 @@ svg{
   vertical-align: middle;
   margin-top: -5px;
 }
+.sub-menu svg{
+  margin-left : 5px;
+  margin-right: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  margin-top: -5px;
+}
 a {
   text-decoration: none;
   color: #7980AB;
