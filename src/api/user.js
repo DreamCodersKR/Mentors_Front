@@ -29,5 +29,5 @@ export function loginUser(credentials) {
 
 // 회원가입 요청
 export function sendPostJoin(data) {
-  return apiClient.post("/MemberJoin",data);
+  return apiClient.post("/UserJoin",data);
 }
