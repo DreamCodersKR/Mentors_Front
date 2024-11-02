@@ -44,6 +44,7 @@ export default {
   background-color: #f4f4f4;
   padding: 20px;
   border-top: 1px solid #ddd;
+  max-height: 150px;
 }
 
 .footer-content {
