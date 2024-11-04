@@ -25,52 +25,103 @@
 <script>
 import iconBoard from "@/components/icons/iconBoard.vue";
 export default {
-  name: "WriteBoardPage",
-  date() {
+  name: "WriteBoard",
+  components: {
+    iconBoard,
+  },
+  data() {
     return {
       title: "",
       content: "",
     };
   },
   methods: {
-    goToBoard() {
-      this.$router.push("board");
+    submitPost() {
+      if (!this.title || !this.content) {
+        alert("제목과 내용을 입력해 주세요.");
+        return;
+      }
+      // 게시글 등록 로직 추가
+      console.log("등록할 게시글:", {
+        title: this.title,
+        content: this.content,
+      });
     },
-  },
-  components: {
-    iconBoard,
+    attachImage() {
+      // 이미지 첨부 로직 추가
+      alert("이미지 첨부 기능은 아직 구현되지 않았습니다.");
+    },
+    goToBoard() {
+      this.$router.push("/board");
+    },
   },
 };
 </script>
 
 <style scoped>
 .write-board-container {
-  max-width: 1800;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .board-title {
-  width: 170px;
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   cursor: pointer;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 .title-input {
   width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .content-input {
+  width: 100%;
+  height: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none;
 }
 
 .button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.submit-btn {
+.submit-btn,
+.image-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #b3c4fc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-btn:hover,
+.image-btn:hover {
+  background-color: #96a9f5;
 }
 
 .image-btn {
+  display: flex;
+  align-items: center;
 }
 </style>
