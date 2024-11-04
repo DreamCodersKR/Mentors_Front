@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="home-container">
     <!-- 사이드바 영역 -->
     <div class="left-menu" :class="{ 'is-open': isSidebarOpen }">
       <SideBar @toggle-sidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-.main-container {
+.home-container {
   display: flex;
   height: 100vh;
   width: 100vw;
