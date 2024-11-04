@@ -1,5 +1,4 @@
 <template>
-  
   <div :class="['sidebar', { 'is-open': isSidebarOpen }]">
     <!-- MenuButton 컴포넌트 -->
     <MenuButton
@@ -44,7 +43,9 @@
           </transition>
         </li>
         <li class="menu-item">
-          <router-link to="/premium"><iconPremium/>프리미엄 멘토링</router-link>
+          <router-link to="/premium"
+            ><iconPremium />프리미엄 멘토링</router-link
+          >
         </li>
         <li class="menu-item">
           <router-link to="/test"><iconChatting />채팅목록</router-link>
@@ -120,17 +121,16 @@ export default {
 </script>
 
 <style scoped>
-
-svg{
-  margin-left : 15px;
+svg {
+  margin-left: 15px;
   margin-right: 5px;
   margin-top: 0px;
   margin-bottom: 0px;
   vertical-align: middle;
   margin-top: -5px;
 }
-.sub-menu svg{
-  margin-left : 5px;
+.sub-menu svg {
+  margin-left: 5px;
   margin-right: 5px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -139,7 +139,7 @@ svg{
 }
 a {
   text-decoration: none;
-  color: #7980AB;
+  color: #7980ab;
   font-weight: bold;
   background-color: white;
   display: block;
@@ -151,8 +151,6 @@ a {
 a:hover {
   background-color: #ddefff33; /* 호버 시 배경색 변경 */
 }
-
-
 
 ul {
   list-style: none;
@@ -198,7 +196,7 @@ li {
 }
 
 .sidebar.is-open {
-  width: 250px;
+  width: 260px;
 }
 
 .menu-list {
@@ -217,7 +215,7 @@ li {
 
 .menu-item {
   font-size: 18px;
-  text-align : left;
+  text-align: left;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 8px; /* 둥근 모서리 */
@@ -231,7 +229,7 @@ li {
 }
 
 .menu-title {
-  color: #7980AB;
+  color: #7980ab;
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
@@ -240,7 +238,7 @@ li {
   padding: 16px;
   transition: background-color 0.3s ease;
 }
-.menu-title:hover{
+.menu-title:hover {
   background-color: rgba(255, 255, 255, 0.2); /* 호버 시 배경색 변경 */
 }
 

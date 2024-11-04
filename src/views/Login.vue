@@ -136,7 +136,7 @@ export default {
   font-weight: bold;
   color: #333;
   font-family: "Arial", sans-serif;
-  margin-left: -5px;
+  margin-left: -10px;
 }
 
 /* 입력 필드 스타일 */

@@ -45,7 +45,7 @@ export default {
   padding: 20px;
   border-top: 1px solid #ddd;
   max-height: 150px;
-  background : white;
+  background: white;
 }
 
 .footer-content {
@@ -73,6 +73,7 @@ export default {
   font-size: 20px;
   font-weight: bold;
   color: #333;
+  margin-left: -10px;
 }
 
 .footer-contact {

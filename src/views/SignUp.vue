@@ -113,8 +113,8 @@ export default {
     // 비밀번호와 비밀번호 확인이 일치하는지 확인
     checkPasswordMatch() {
       if (this.password !== this.confirmPassword) {
-        alert("비밀번호가 일치하지 않습니다!");
         this.passwordMismatch = true; // 비밀번호가 일치하지 않을 경우
+        alert("비밀번호가 일치하지 않습니다!");
       } else {
         this.passwordMismatch = false; // 비밀번호가 일치할 경우
         sendPostJoin({
@@ -180,6 +180,7 @@ export default {
   font-weight: bold;
   color: #333;
   font-family: "Arial", sans-serif;
+  margin-left: -10px;
 }
 
 .signup-title {

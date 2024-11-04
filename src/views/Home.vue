@@ -114,6 +114,7 @@ export default {
   font-size: 28px;
   font-weight: bold;
   color: #333;
+  margin-left: -10px;
 }
 
 .auth-buttons {
@@ -157,6 +158,6 @@ button:hover {
   flex: 1;
   padding: 20px;
   overflow: auto;
-  background : white;
+  background: white;
 }
 </style>
