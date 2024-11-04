@@ -118,29 +118,31 @@ export default {
         this.passwordMismatch = false; // 비밀번호가 일치할 경우
         // 비밀번호가 일치하면 추가적인 회원가입 처리 로직을 여기에 추가
         alert("회원가입 완료");
+        this.goToHome();
       }
     },
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
     },
-    sendJoin(){
+    sendJoin() {
       sendPostJoin({
-        memberType:this.memberType,
-        gender:this.gender,
-        email:this.email,
-        password:this.password,
-        confirmPassword:this.confirmPassword,
-        name:this.name,
-        birthdate:this.birthdate,
-        passwordMismatch:this.passwordMismatch
+        memberType: this.memberType,
+        gender: this.gender,
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+        name: this.name,
+        birthdate: this.birthdate,
+        passwordMismatch: this.passwordMismatch,
       })
         .then((response) => {
           console.log("Response : ", response.data);
+          this.checkPasswordMatch();
         })
         .catch((error) => {
           console.error("에러남 : ", error);
         });
-    }
+    },
   },
 };
 </script>
