@@ -157,5 +157,6 @@ button:hover {
   flex: 1;
   padding: 20px;
   overflow: auto;
+  background : white;
 }
 </style>
