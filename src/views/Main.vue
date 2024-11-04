@@ -1,5 +1,7 @@
 <template>
-  <h1>엄준식은 살아있다!!</h1>
+  <div>
+    <h1>엄준식은 살아있다!!</h1>
+  </div>
 </template>
 
 <script>
@@ -8,4 +10,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

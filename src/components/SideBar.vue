@@ -130,7 +130,7 @@ svg {
   margin-top: -5px;
 }
 .sub-menu svg {
-  margin-left: 5px;
+  margin-left: 15px;
   margin-right: 5px;
   margin-top: 0px;
   margin-bottom: 0px;

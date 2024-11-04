@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .write-board-container {
   max-width: 1800;
   margin: 0 auto;

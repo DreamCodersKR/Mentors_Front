@@ -29,10 +29,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .menu-toggle {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background : #A9D4FB;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #a9d4fb;
   color: #fff;
   border: none;
   padding: 15px;
@@ -48,7 +48,7 @@ export default {
 }
 
 .menu-toggle:hover {
-  background-color: #99CEFF;
+  background-color: #99ceff;
 }
 
 .menu-toggle:focus {
