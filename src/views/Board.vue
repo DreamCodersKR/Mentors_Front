@@ -31,6 +31,7 @@
     </ul>
 
     <div class="pagination">
+      <div>
       <button
         v-for="page in totalPages"
         :key="page"
@@ -39,8 +40,9 @@
       >
         {{ page }}
       </button>
+     </div>
+      <button type = "button" class="write-button" @click="goToWritePage">글쓰기</button>
     </div>
-    <button class="write-button" @click="goToWritePage">글쓰기</button>
   </div>
 </template>
 
@@ -101,8 +103,8 @@ h2 {
   margin-top: 5px;
 }
 
-.write-button {
-  float: right;
+button[type="button"].write-button {
+  
   padding: 10px 20px;
   background-color: #333;
   color: white;
@@ -154,8 +156,14 @@ h2 {
 
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 20px;
+}
+.pagination div{
+  display: flex;
+  justify-content: center;
+  flex: 1; /* 중앙 정렬 고정 */
+  align-items: center;/* 버튼위아래 안늘어나게 고정 */
 }
 
 .pagination button {
