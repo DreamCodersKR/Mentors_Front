@@ -45,6 +45,7 @@ export default {
   padding: 20px;
   border-top: 1px solid #ddd;
   max-height: 150px;
+  background : white;
 }
 
 .footer-content {
