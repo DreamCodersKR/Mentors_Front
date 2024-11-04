@@ -8,6 +8,7 @@ const boards = [
     views: 13,
     comments: 7,
     likes: 7,
+    boardImg: "",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const boards = [
     views: 111,
     comments: 1,
     likes: 18,
+    boardImg: "",
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const boards = [
     views: 222,
     comments: 12,
     likes: 99,
+    boardImg: "",
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const boards = [
     views: 10,
     comments: 3,
     likes: 1,
+    boardImg: "",
   },
 ];
 
