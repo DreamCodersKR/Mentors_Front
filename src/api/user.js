@@ -31,3 +31,8 @@ export function loginUser(credentials) {
 export function sendPostJoin(data) {
   return apiClient.post("/UserJoin",data);
 }
+
+//로그인 요청
+export function sendPostLogin(data) {
+  return apiClient.post("/UserLogin",data);
+}

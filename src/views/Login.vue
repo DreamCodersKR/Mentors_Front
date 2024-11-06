@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import {sendPostLogin} from "../api/user";
 export default {
   name: "LoginPage",
   data() {
@@ -73,8 +74,12 @@ export default {
       if (!this.email || !this.password) {
         alert("이메일과 비밀번호를 입력해주세요.");
         return;
+      }else{
+        sendPostLogin({
+        email:this.email,
+        passward:this.password
+        })
       }
-
       // 로그인 로직 처리
       console.log("로그인 시도:", {
         email: this.email,
