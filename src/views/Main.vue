@@ -17,12 +17,25 @@
       <div class="category-content">
         <div v-for="(cate, i) in categories" :key="i" class="category-card">
           <img
-            :src="getImageUrl(`${cate.cateImg}`)"
+            :src="cate.cateImg"
             :alt="`${cate.mainCate} 이미지`"
             class="category-image"
           />
           <div class="category-info">
-            <h3 class="category-main">{{ cate.mainCate }}</h3>
+            <p class="category-main">
+              <span v-if="cate.mainCate == '학업 / 교육'"
+                ><iconEducation
+              /></span>
+              <span v-if="cate.mainCate == '경력 / 직업'"><iconCarrier /></span>
+              <span v-if="cate.mainCate == 'IT / 기술'"><iconIT /></span>
+              <span v-if="cate.mainCate == '금융 / 경제'"><iconEconomy /></span>
+              <span v-if="cate.mainCate == '자기계발 & 멘탈케어'">
+                <iconImprovement />
+              </span>
+              <span v-if="cate.mainCate == '예술 / 취미'"><iconArt /></span>
+              <span v-if="cate.mainCate == '기타'"><iconEtc /></span>
+              {{ cate.mainCate }}
+            </p>
             <p class="category-main-title">{{ cate.mainTitle }}</p>
             <p class="category-sub-title">{{ cate.subTitle }}</p>
             <ul class="sub-categories">
@@ -43,6 +56,13 @@
 
 <script>
 import cates from "@/datas/CategoriesExample";
+import iconEducation from "@/components/icons/iconEducation.vue";
+import iconCarrier from "@/components/icons/iconCarrier.vue";
+import iconIT from "@/components/icons/iconIT.vue";
+import iconEconomy from "@/components/icons/iconEconomy.vue";
+import iconImprovement from "@/components/icons/iconImprovement.vue";
+import iconArt from "@/components/icons/iconArt.vue";
+import iconEtc from "@/components/icons/iconEtc.vue";
 
 export default {
   name: "MainPage",
@@ -52,14 +72,23 @@ export default {
     };
   },
   methods: {
-    getImageUrl(imagePath) {
-      try {
-        return new URL(imagePath, import.meta.url).href;
-      } catch (e) {
-        console.error("이미지 경로 오류:", e);
-        return "@/images/boardDefault.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
-      }
-    },
+    // getImageUrl(imagePath) {
+    //   try {
+    //     return new URL(`../${imagePath}`, import.meta.url).href;
+    //   } catch (e) {
+    //     console.error("이미지 경로 오류:", e);
+    //     return "@/images/default.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
+    //   }
+    // },
+  },
+  components: {
+    iconEducation,
+    iconCarrier,
+    iconIT,
+    iconEconomy,
+    iconImprovement,
+    iconArt,
+    iconEtc,
   },
 };
 </script>
@@ -104,7 +133,7 @@ export default {
 
 .cont-wrap {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1600px;
   padding: 20px;
 }
 
@@ -122,8 +151,8 @@ export default {
 }
 
 .category-image {
-  width: 150px;
-  height: auto;
+  width: 350px;
+  height: 300px;
   object-fit: cover;
   border-right: 1px solid #ddd;
 }
@@ -137,8 +166,7 @@ export default {
 
 .category-main {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+  color: #7980ab;
   margin-bottom: 10px;
 }
 
@@ -153,6 +181,7 @@ export default {
   font-size: 1rem;
   color: #888;
   margin-bottom: 10px;
+  white-space: pre-line;
 }
 
 .sub-categories {
