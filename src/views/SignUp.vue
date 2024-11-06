@@ -99,6 +99,17 @@
       />
     </div>
 
+    <!-- 이름 -->
+    <div class="form-group">
+      <label for="nickname">닉네임 *</label>
+      <input
+        type="text"
+        id="nickname"
+        v-model="nickname"
+        placeholder="닉네임을 입력해주세요."
+      />
+    </div>
+
     <!-- 이메일 -->
     <div class="form-group">
       <label for="email">이메일 *</label>
@@ -163,6 +174,7 @@ export default {
       password: "",
       confirmPassword: "",
       name: "",
+      nickname: "",
       birthDate: "",
       passwordMismatch: false, // 비밀번호 불일치 여부 확인을 위한 변수
     };
@@ -182,9 +194,9 @@ export default {
           name: this.name,
           email: this.email,
           password: this.password,
-          confirmPassword: this.confirmPassword,
           birthDate: this.birthDate,
-          passwordMismatch: this.passwordMismatch,
+          // confirmPassword: this.confirmPassword,
+          // passwordMismatch: this.passwordMismatch,
         })
           .then((response) => {
             console.log("Response : ", response.data);
@@ -227,7 +239,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
@@ -262,7 +274,7 @@ export default {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 13px;
 }
 
 label {
