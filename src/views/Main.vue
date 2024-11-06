@@ -34,7 +34,7 @@ export default {
 
 .main-banner {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1600px;
   padding: 60px 20px;
   background-image: url("@/images/mainImg.png");
   background-size: cover;
