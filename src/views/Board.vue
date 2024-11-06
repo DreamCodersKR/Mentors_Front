@@ -32,16 +32,18 @@
 
     <div class="pagination">
       <div>
-      <button
-        v-for="page in totalPages"
-        :key="page"
-        @click="changePage(page)"
-        :class="{ active: page === currentPage }"
-      >
-        {{ page }}
+        <button
+          v-for="page in totalPages"
+          :key="page"
+          @click="changePage(page)"
+          :class="{ active: page === currentPage }"
+        >
+          {{ page }}
+        </button>
+      </div>
+      <button type="button" class="write-button" @click="goToWritePage">
+        글쓰기
       </button>
-     </div>
-      <button type = "button" class="write-button" @click="goToWritePage">글쓰기</button>
     </div>
   </div>
 </template>
@@ -83,6 +85,9 @@ export default {
 
 .board-title {
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .boardImg {
@@ -100,11 +105,9 @@ h2 {
   font-size: 24px;
   font-weight: bold;
   margin-left: 5px;
-  margin-top: 5px;
 }
 
 button[type="button"].write-button {
-  
   padding: 10px 20px;
   background-color: #333;
   color: white;
@@ -159,11 +162,11 @@ button[type="button"].write-button {
   justify-content: space-between;
   margin-top: 20px;
 }
-.pagination div{
+.pagination div {
   display: flex;
   justify-content: center;
   flex: 1; /* 중앙 정렬 고정 */
-  align-items: center;/* 버튼위아래 안늘어나게 고정 */
+  align-items: center; /* 버튼위아래 안늘어나게 고정 */
 }
 
 .pagination button {
