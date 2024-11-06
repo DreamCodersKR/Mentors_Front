@@ -57,7 +57,7 @@ export default {
         return new URL(imagePath, import.meta.url).href;
       } catch (e) {
         console.error("이미지 경로 오류:", e);
-        return "@/images/default.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
+        return "@/images/boardDefault.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
       }
     },
   },

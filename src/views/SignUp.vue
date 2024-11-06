@@ -42,7 +42,7 @@
           ><input
             type="radio"
             v-model="gender"
-            value="남자"
+            value="m"
             name="gender"
             tabindex="0"
           />
@@ -52,7 +52,7 @@
           ><input
             type="radio"
             v-model="gender"
-            value="여자"
+            value="f"
             name="gender"
             tabindex="0"
           />
