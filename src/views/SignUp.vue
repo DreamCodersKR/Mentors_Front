@@ -12,11 +12,23 @@
       <label>회원유형 *</label>
       <div class="radio-group">
         <label
-          ><input type="radio" v-model="memberType" value="주니어" />
+          ><input
+            type="radio"
+            v-model="memberType"
+            value="주니어"
+            name="memberType"
+            tabindex="0"
+          />
           주니어</label
         >
         <label
-          ><input type="radio" v-model="memberType" value="시니어" />
+          ><input
+            type="radio"
+            v-model="memberType"
+            value="시니어"
+            name="memberType"
+            tabindex="0"
+          />
           시니어</label
         >
       </div>
@@ -26,8 +38,53 @@
     <div class="form-group">
       <label>성별 *</label>
       <div class="radio-group">
-        <label><input type="radio" v-model="gender" value="남자" /> 남자</label>
-        <label><input type="radio" v-model="gender" value="여자" /> 여자</label>
+        <label
+          ><input
+            type="radio"
+            v-model="gender"
+            value="남자"
+            name="gender"
+            tabindex="0"
+          />
+          남자</label
+        >
+        <label
+          ><input
+            type="radio"
+            v-model="gender"
+            value="여자"
+            name="gender"
+            tabindex="0"
+          />
+          여자</label
+        >
+      </div>
+    </div>
+
+    <!--멘토여부 확인-->
+    <div class="form-group">
+      <label>역할을 선택해주세요 *</label>
+      <div class="radio-group">
+        <label
+          ><input
+            type="radio"
+            v-model="mentorYn"
+            value="Y"
+            name="mentorYn"
+            tabindex="0"
+          />
+          멘토</label
+        >
+        <label
+          ><input
+            type="radio"
+            v-model="mentorYn"
+            value="N"
+            name="mentorYn"
+            tabindex="0"
+          />
+          멘티</label
+        >
       </div>
     </div>
 
@@ -84,7 +141,7 @@
       <input
         type="date"
         id="birthdate"
-        v-model="birthdate"
+        v-mode.birthdate="birthdate"
         placeholder="YYYY-MM-DD"
       />
     </div>
@@ -101,6 +158,7 @@ export default {
     return {
       memberType: "", // 회원유형을 하나만 선택할 수 있도록 수정
       gender: "",
+      mentorYn: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -113,17 +171,18 @@ export default {
     // 비밀번호와 비밀번호 확인이 일치하는지 확인
     checkPasswordMatch() {
       if (this.password !== this.confirmPassword) {
-        alert("비밀번호가 일치하지 않습니다!");
         this.passwordMismatch = true; // 비밀번호가 일치하지 않을 경우
+        alert("비밀번호가 일치하지 않습니다!");
       } else {
         this.passwordMismatch = false; // 비밀번호가 일치할 경우
         sendPostJoin({
           memberType: this.memberType,
           gender: this.gender,
+          mentorYn: this.mentorYn,
+          name: this.name,
           email: this.email,
           password: this.password,
           confirmPassword: this.confirmPassword,
-          name: this.name,
           birthdate: this.birthdate,
           passwordMismatch: this.passwordMismatch,
         })
@@ -137,6 +196,7 @@ export default {
           });
       }
     },
+
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
     },
@@ -180,6 +240,7 @@ export default {
   font-weight: bold;
   color: #333;
   font-family: "Arial", sans-serif;
+  margin-left: -10px;
 }
 
 .signup-title {
@@ -241,5 +302,49 @@ input[type="date"] {
 
 .submit-btn:hover {
   background-color: #6a6ad5;
+}
+/* 라디오버튼 스타일링 */
+[type="radio"] {
+  vertical-align: middle;
+  appearance: none;
+  border: 2px solid #17161a;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  position: relative;
+  transition: border 0.1s ease-in-out;
+  margin-right: 8px; /* 텍스트와 버튼 사이 간격 조정 */
+}
+
+[type="radio"]:checked {
+  background-color: #1d1b20;
+  border-color: #1d1b20;
+}
+
+[type="radio"]:checked::after {
+  content: "✔"; /* 체크 표시 */
+  color: white;
+  font-size: 0.75em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 체크 표시를 버튼 중앙에 배치 */
+}
+
+[type="radio"]:focus-visible {
+  outline-offset: 2px;
+  outline: 2px dotted #1d1b20;
+}
+
+[type="radio"]:hover {
+  box-shadow: 0 0 0 4px lightgray;
+  cursor: pointer;
+}
+
+[type="radio"]:disabled {
+  background-color: lightgray;
+  box-shadow: none;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 </style>

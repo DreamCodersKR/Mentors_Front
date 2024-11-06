@@ -7,20 +7,31 @@
 
     <ul class="post-list">
       <li v-for="post in posts" :key="post.id" class="post-item">
-        <div class="post-header">
-          <h3 class="post-title">{{ post.title }}</h3>
-          <p class="post-meta">{{ post.date }} | {{ post.author }}</p>
-        </div>
-        <p class="post-content">{{ post.content }}</p>
-        <div class="post-footer">
-          <span>조회수 {{ post.views }}</span>
-          <span>댓글 {{ post.comments }}</span>
-          <span>좋아요 {{ post.likes }}</span>
+        <img
+          v-if="post.img == null"
+          src="@/images/boardDefault.jpg"
+          alt="boardImg"
+          class="boardImg"
+        />
+        <div class="post-wrap">
+          <div class="post-header">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p class="post-meta">
+              No. {{ post.id }} | {{ post.author }} | {{ post.date }}
+            </p>
+          </div>
+          <p class="post-content">{{ post.content }}</p>
+          <div class="post-footer">
+            <span>조회수 {{ post.views }}</span>
+            <span>댓글 {{ post.comments }}</span>
+            <span>좋아요 {{ post.likes }}</span>
+          </div>
         </div>
       </li>
     </ul>
 
     <div class="pagination">
+      <div>
       <button
         v-for="page in totalPages"
         :key="page"
@@ -29,8 +40,9 @@
       >
         {{ page }}
       </button>
+     </div>
+      <button type = "button" class="write-button" @click="goToWritePage">글쓰기</button>
     </div>
-    <button class="write-button" @click="goToWritePage">글쓰기</button>
   </div>
 </template>
 
@@ -52,7 +64,7 @@ export default {
   },
   methods: {
     goToWritePage() {
-      this.$router.push("/write");
+      this.$router.push("/writeBoard");
     },
     changePage(page) {
       this.currentPage = page;
@@ -64,7 +76,7 @@ export default {
 
 <style scoped>
 .board-container {
-  max-width: 1400px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -73,22 +85,32 @@ export default {
   display: flex;
 }
 
+.boardImg {
+  width: 160px;
+  height: 200px;
+  margin-right: 10px;
+  display: inline-block;
+  margin-right: 15px;
+}
+.post-wrap {
+  flex: 1;
+}
+
 h2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
-.write-button {
-  float: right;
+button[type="button"].write-button {
+  
   padding: 10px 20px;
   background-color: #333;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 .post-list {
@@ -100,6 +122,8 @@ h2 {
 .post-item {
   padding: 20px;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: flex-start;
 }
 
 .post-header {
@@ -132,8 +156,14 @@ h2 {
 
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 20px;
+}
+.pagination div{
+  display: flex;
+  justify-content: center;
+  flex: 1; /* 중앙 정렬 고정 */
+  align-items: center;/* 버튼위아래 안늘어나게 고정 */
 }
 
 .pagination button {

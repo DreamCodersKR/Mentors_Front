@@ -7,6 +7,8 @@ import LoginPage from "@/views/Login.vue";
 import MainPage from "@/views/Main.vue";
 import BoardPage from "@/views/Board.vue";
 import PremiumPage from "@/views/Premium.vue";
+import WriteBoardPage from "@/views/WriteBoard.vue";
+import BoardDetailPage from "@/views/BoardDetail.vue";
 
 const routes = [
   {
@@ -32,6 +34,16 @@ const routes = [
         path: "board",
         name: "board",
         component: BoardPage,
+      },
+      {
+        path: "writeBoard",
+        name: "writeBoard",
+        component: WriteBoardPage,
+      },
+      {
+        path: "boardDetail",
+        name: "boardDetail",
+        component: BoardDetailPage,
       },
       {
         path: "premium",
