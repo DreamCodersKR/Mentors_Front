@@ -12,8 +12,17 @@
       </div>
     </div>
 
-    <div class="additional-content">
-      <p>ai 맞춤 멘토링 화면 구성해야함</p>
+    <div class="cont-wrap">
+      <div class="categori-content">
+        <div class="edu-con">
+          <img src="@/images/cateImgs/edu.jpg" alt="eduImg" />
+          <div class="edu-subs">
+            <div class="edu-icon"></div>
+            <p class="edu-subcate">대학 및 입시 상담</p>
+          </div>
+          <div class="edu-text"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -62,7 +71,7 @@ export default {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-.additional-content {
+.cont-wrap {
   width: 100%;
   max-width: 1200px;
   padding: 20px;

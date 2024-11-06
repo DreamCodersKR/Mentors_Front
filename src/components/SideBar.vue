@@ -42,11 +42,11 @@
             </ul>
           </transition>
         </li>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
           <router-link to="/premium"
             ><iconPremium />프리미엄 멘토링</router-link
           >
-        </li>
+        </li> -->
         <li class="menu-item">
           <router-link to="/test"><iconChatting />채팅목록</router-link>
         </li>
@@ -75,7 +75,7 @@ import iconIT from "@/components/icons/iconIT.vue";
 import iconChatting from "@/components/icons/iconChatting.vue";
 import iconBoard from "@/components/icons/iconBoard.vue";
 import iconAbout from "@/components/icons/iconAbout.vue";
-import iconPremium from "@/components/icons/iconPremium.vue";
+// import iconPremium from "@/components/icons/iconPremium.vue";
 
 //-----------------------------------
 
@@ -95,7 +95,7 @@ export default {
     iconChatting,
     iconBoard,
     iconAbout,
-    iconPremium,
+    // iconPremium,
   },
   props: {
     isSidebarOpen: {
