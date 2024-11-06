@@ -22,31 +22,47 @@
             class="category-image"
           />
           <div class="category-info">
-            <p class="category-main">
-              <span v-if="cate.mainCate == '학업 / 교육'"
-                ><iconEducation
-              /></span>
-              <span v-if="cate.mainCate == '경력 / 직업'"><iconCarrier /></span>
-              <span v-if="cate.mainCate == 'IT / 기술'"><iconIT /></span>
-              <span v-if="cate.mainCate == '금융 / 경제'"><iconEconomy /></span>
-              <span v-if="cate.mainCate == '자기계발 & 멘탈케어'">
-                <iconImprovement />
-              </span>
-              <span v-if="cate.mainCate == '예술 / 취미'"><iconArt /></span>
-              <span v-if="cate.mainCate == '기타'"><iconEtc /></span>
-              {{ cate.mainCate }}
-            </p>
-            <p class="category-main-title">{{ cate.mainTitle }}</p>
-            <p class="category-sub-title">{{ cate.subTitle }}</p>
-            <ul class="sub-categories">
-              <li
-                v-for="(sub, subIndex) in cate.subCate"
-                :key="subIndex"
-                class="sub-category"
-              >
-                {{ sub }}
-              </li>
-            </ul>
+            <div class="left-section">
+              <div class="category-header">
+                <p class="category-main">
+                  <span v-if="cate.mainCate == '학업 / 교육'">
+                    <iconEducation />
+                  </span>
+                  <span v-if="cate.mainCate == '경력 / 직업'">
+                    <iconCarrier />
+                  </span>
+                  <span v-if="cate.mainCate == 'IT / 기술'">
+                    <iconIT />
+                  </span>
+                  <span v-if="cate.mainCate == '금융 / 경제'">
+                    <iconEconomy />
+                  </span>
+                  <span v-if="cate.mainCate == '자기계발 & 멘탈케어'">
+                    <iconImprovement />
+                  </span>
+                  <span v-if="cate.mainCate == '예술 / 취미'">
+                    <iconArt />
+                  </span>
+                  <span v-if="cate.mainCate == '기타'">
+                    <iconEtc />
+                  </span>
+                  {{ cate.mainCate }}
+                </p>
+              </div>
+              <ul class="sub-categories">
+                <li
+                  v-for="(sub, subIndex) in cate.subCate"
+                  :key="subIndex"
+                  class="sub-category"
+                >
+                  {{ sub }}
+                </li>
+              </ul>
+            </div>
+            <div class="right-section">
+              <p class="category-main-title">{{ cate.mainTitle }}</p>
+              <p class="category-sub-title">{{ cate.subTitle }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -71,16 +87,7 @@ export default {
       categories: cates,
     };
   },
-  methods: {
-    // getImageUrl(imagePath) {
-    //   try {
-    //     return new URL(`../${imagePath}`, import.meta.url).href;
-    //   } catch (e) {
-    //     console.error("이미지 경로 오류:", e);
-    //     return "@/images/default.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
-    //   }
-    // },
-  },
+  methods: {},
   components: {
     iconEducation,
     iconCarrier,
@@ -114,26 +121,9 @@ export default {
   margin-bottom: 40px;
 }
 
-.text-content {
-  max-width: 600px;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
-
-.subtitle {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
-
 .cont-wrap {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1200px;
   padding: 20px;
 }
 
@@ -145,29 +135,51 @@ export default {
 
 .category-card {
   display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  overflow: hidden;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .category-image {
-  width: 350px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
-  border-right: 1px solid #ddd;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 
 .category-info {
-  padding: 20px;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.left-info {
+  max-width: 50%;
+}
+
+.right-info {
+  max-width: 50%;
 }
 
 .category-main {
   font-size: 1.5rem;
   color: #7980ab;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-main span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 5px;
 }
 
 .category-main-title {
@@ -175,6 +187,7 @@ export default {
   font-weight: bold;
   color: #666;
   margin-bottom: 10px;
+  white-space: pre-line;
 }
 
 .category-sub-title {
