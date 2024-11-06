@@ -141,7 +141,7 @@
       <input
         type="date"
         id="birthdate"
-        v-mode.birthDate="birthDate"
+        v-model="birthDate"
         placeholder="YYYY-MM-DD"
       />
     </div>

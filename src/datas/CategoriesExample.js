@@ -31,3 +31,5 @@ const cates = [
     cateImg: "@/imges/cateImgs/it.jpg",
   },
 ];
+
+export default cates;

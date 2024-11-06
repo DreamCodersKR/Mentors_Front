@@ -12,15 +12,29 @@
       </div>
     </div>
 
-    <div class="cont-wrap">
-      <div class="categori-content">
-        <div class="edu-con">
-          <img src="@/images/cateImgs/edu.jpg" alt="eduImg" />
-          <div class="edu-subs">
-            <div class="edu-icon"></div>
-            <p class="edu-subcate">대학 및 입시 상담</p>
+    <!-- 카테고리 카드 -->
+    <div class="cont-wrap" v-if="categories && categories.length">
+      <div class="category-content">
+        <div v-for="(cate, i) in categories" :key="i" class="category-card">
+          <img
+            :src="getImageUrl(`${cate.cateImg}`)"
+            :alt="`${cate.mainCate} 이미지`"
+            class="category-image"
+          />
+          <div class="category-info">
+            <h3 class="category-main">{{ cate.mainCate }}</h3>
+            <p class="category-main-title">{{ cate.mainTitle }}</p>
+            <p class="category-sub-title">{{ cate.subTitle }}</p>
+            <ul class="sub-categories">
+              <li
+                v-for="(sub, subIndex) in cate.subCate"
+                :key="subIndex"
+                class="sub-category"
+              >
+                {{ sub }}
+              </li>
+            </ul>
           </div>
-          <div class="edu-text"></div>
         </div>
       </div>
     </div>
@@ -28,8 +42,25 @@
 </template>
 
 <script>
+import cates from "@/datas/CategoriesExample";
+
 export default {
   name: "MainPage",
+  data() {
+    return {
+      categories: cates,
+    };
+  },
+  methods: {
+    getImageUrl(imagePath) {
+      try {
+        return new URL(imagePath, import.meta.url).href;
+      } catch (e) {
+        console.error("이미지 경로 오류:", e);
+        return "@/images/default.jpg"; // 기본 이미지 경로 (이미지 경로가 유효하지 않을 때)
+      }
+    },
+  },
 };
 </script>
 
@@ -75,5 +106,64 @@ export default {
   width: 100%;
   max-width: 1200px;
   padding: 20px;
+}
+
+.category-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.category-card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.category-image {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-right: 1px solid #ddd;
+}
+
+.category-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category-main {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.category-main-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.category-sub-title {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.sub-categories {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-category {
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 5px;
 }
 </style>
