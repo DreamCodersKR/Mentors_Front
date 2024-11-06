@@ -12,37 +12,78 @@
       <label>회원유형 *</label>
       <div class="radio-group">
         <label
-          ><input type="radio" v-model="memberType" value="주니어" name = "memberType" tabindex="0" />
+          ><input
+            type="radio"
+            v-model="memberType"
+            value="주니어"
+            name="memberType"
+            tabindex="0"
+          />
           주니어</label
         >
         <label
-          ><input type="radio" v-model="memberType" value="시니어" name = "memberType" tabindex="0" />
+          ><input
+            type="radio"
+            v-model="memberType"
+            value="시니어"
+            name="memberType"
+            tabindex="0"
+          />
           시니어</label
         >
       </div>
     </div>
 
-    
     <!-- 성별 -->
     <div class="form-group">
       <label>성별 *</label>
       <div class="radio-group">
-        <label><input type="radio" v-model="gender" value="남자" name = "gender" tabindex="0" /> 남자</label>
-        <label><input type="radio" v-model="gender" value="여자" name = "gender" tabindex="0" /> 여자</label>
-      </div>
-    </div>
-    
-    <!--멘토여부 확인-->
-    <div class="form-group">
-      <label>멘토로 가입하실건가요? *</label>
-      <div class="radio-group">
         <label
-          ><input type="radio" v-model="mentorYN" value="멘토" name = "mentorYN" tabindex="0" />
-          네</label
+          ><input
+            type="radio"
+            v-model="gender"
+            value="남자"
+            name="gender"
+            tabindex="0"
+          />
+          남자</label
         >
         <label
-          ><input type="radio" v-model="mentorYN" value="멘티" name = "mentorYN" tabindex="0" />
-          아니오</label
+          ><input
+            type="radio"
+            v-model="gender"
+            value="여자"
+            name="gender"
+            tabindex="0"
+          />
+          여자</label
+        >
+      </div>
+    </div>
+
+    <!--멘토여부 확인-->
+    <div class="form-group">
+      <label>역할을 선택해주세요 *</label>
+      <div class="radio-group">
+        <label
+          ><input
+            type="radio"
+            v-model="mentorYn"
+            value="Y"
+            name="mentorYn"
+            tabindex="0"
+          />
+          멘토</label
+        >
+        <label
+          ><input
+            type="radio"
+            v-model="mentorYn"
+            value="N"
+            name="mentorYn"
+            tabindex="0"
+          />
+          멘티</label
         >
       </div>
     </div>
@@ -117,6 +158,7 @@ export default {
     return {
       memberType: "", // 회원유형을 하나만 선택할 수 있도록 수정
       gender: "",
+      mentorYn: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -136,10 +178,11 @@ export default {
         sendPostJoin({
           memberType: this.memberType,
           gender: this.gender,
+          mentorYn: this.mentorYn,
+          name: this.name,
           email: this.email,
           password: this.password,
           confirmPassword: this.confirmPassword,
-          name: this.name,
           birthdate: this.birthdate,
           passwordMismatch: this.passwordMismatch,
         })
@@ -152,7 +195,6 @@ export default {
             console.error("에러남 : ", error);
           });
       }
-      
     },
 
     goToHome() {
@@ -161,14 +203,11 @@ export default {
     sendJoin() {
       this.checkPasswordMatch();
     },
-
   },
 };
-
 </script>
 
 <style scoped>
-
 .signup-container {
   max-width: 400px;
   margin: 0 auto;
@@ -268,7 +307,7 @@ input[type="date"] {
 [type="radio"] {
   vertical-align: middle;
   appearance: none;
-  border: 2px solid #17161A;
+  border: 2px solid #17161a;
   border-radius: 50%;
   width: 1.25em;
   height: 1.25em;
@@ -278,8 +317,8 @@ input[type="date"] {
 }
 
 [type="radio"]:checked {
-  background-color: #1D1B20;
-  border-color: #1D1B20;
+  background-color: #1d1b20;
+  border-color: #1d1b20;
 }
 
 [type="radio"]:checked::after {
@@ -294,7 +333,7 @@ input[type="date"] {
 
 [type="radio"]:focus-visible {
   outline-offset: 2px;
-  outline: 2px dotted #1D1B20;
+  outline: 2px dotted #1d1b20;
 }
 
 [type="radio"]:hover {
