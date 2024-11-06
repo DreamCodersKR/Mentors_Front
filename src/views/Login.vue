@@ -77,7 +77,7 @@ export default {
       }else{
         sendPostLogin({
         email:this.email,
-        passward:this.password
+        password:this.password
         })
       }
       // 로그인 로직 처리
