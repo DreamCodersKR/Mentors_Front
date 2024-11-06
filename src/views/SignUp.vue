@@ -177,6 +177,7 @@ export default {
       nickname: "",
       birthDate: "",
       passwordMismatch: false, // 비밀번호 불일치 여부 확인을 위한 변수
+      userProfileFile: "",
     };
   },
   methods: {
@@ -196,6 +197,7 @@ export default {
           email: this.email,
           password: this.password,
           birthDate: this.birthDate,
+          userProfileFile: "추후에 추가할 기능",
           // confirmPassword: this.confirmPassword,
           // passwordMismatch: this.passwordMismatch,
         })
@@ -205,6 +207,7 @@ export default {
             this.goToHome();
           })
           .catch((error) => {
+            alert("회원가입 실패!");
             console.error("에러남 : ", error);
           });
       }
