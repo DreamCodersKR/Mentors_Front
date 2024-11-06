@@ -192,6 +192,7 @@ export default {
           gender: this.gender,
           mentorYn: this.mentorYn,
           name: this.name,
+          nickname: this.nickname,
           email: this.email,
           password: this.password,
           birthDate: this.birthDate,
