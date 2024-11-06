@@ -14,9 +14,9 @@
         <label
           ><input
             type="radio"
-            v-model="memberType"
+            v-model="userCategory"
             value="주니어"
-            name="memberType"
+            name="userCategory"
             tabindex="0"
           />
           주니어</label
@@ -24,9 +24,9 @@
         <label
           ><input
             type="radio"
-            v-model="memberType"
+            v-model="userCategory"
             value="시니어"
-            name="memberType"
+            name="userCategory"
             tabindex="0"
           />
           시니어</label
@@ -137,11 +137,11 @@
 
     <!-- 생년월일 -->
     <div class="form-group">
-      <label for="birthdate">생년월일 *</label>
+      <label for="birthDate">생년월일 *</label>
       <input
         type="date"
         id="birthdate"
-        v-mode.birthdate="birthdate"
+        v-mode.birthDate="birthDate"
         placeholder="YYYY-MM-DD"
       />
     </div>
@@ -156,14 +156,14 @@ import { sendPostJoin } from "../api/user";
 export default {
   data() {
     return {
-      memberType: "", // 회원유형을 하나만 선택할 수 있도록 수정
+      userCategory: "", // 회원유형을 하나만 선택할 수 있도록 수정
       gender: "",
       mentorYn: "",
       email: "",
       password: "",
       confirmPassword: "",
       name: "",
-      birthdate: "",
+      birthDate: "",
       passwordMismatch: false, // 비밀번호 불일치 여부 확인을 위한 변수
     };
   },
@@ -176,14 +176,14 @@ export default {
       } else {
         this.passwordMismatch = false; // 비밀번호가 일치할 경우
         sendPostJoin({
-          memberType: this.memberType,
+          userCategory: this.userCategory,
           gender: this.gender,
           mentorYn: this.mentorYn,
           name: this.name,
           email: this.email,
           password: this.password,
           confirmPassword: this.confirmPassword,
-          birthdate: this.birthdate,
+          birthDate: this.birthDate,
           passwordMismatch: this.passwordMismatch,
         })
           .then((response) => {
