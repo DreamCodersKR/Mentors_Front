@@ -26,7 +26,7 @@
 
         <div v-else>
           <span>{{ userName }}님 환영합니다!</span>
-          <button @click="logout" class="logout-btn">로그아웃</button>
+          <button @click="handleLogout" class="logout-btn">로그아웃</button>
         </div>
       </header>
 
@@ -62,6 +62,11 @@ export default {
     },
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
+    },
+    handleLogout() {
+      this.logout();
+      alert("로그아웃 완료");
+      this.$router.push("/");
     },
   },
   components: {

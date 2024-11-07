@@ -1,13 +1,18 @@
 import { createStore } from "vuex"; // Vuex 4 방식으로 import
 
+// 초기 상태 설정 함수
+const getDefaultState = () => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  return {
+    isLoggedIn: user ? true : false,
+    userName: user ? user.userName : null,
+    userCategory: user ? user.userCategory : null,
+    userToken: user ? user.userToken : null,
+  };
+};
+
 export default createStore({
-  state: {
-    // 상태 정의
-    isLoggedIn: false, // 로그인 여부 확인
-    userName: null, // 사용자 이름
-    userCategory: null, // 사용자 유형
-    userToken: null, // 사용자 토큰 (옵션)
-  },
+  state: getDefaultState(), // 앱 로드 시 sessionStorage 상태를 기본값으로
   mutations: {
     setUser(state, payload) {
       state.isLoggedIn = true;
