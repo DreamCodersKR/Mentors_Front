@@ -36,3 +36,13 @@ export function sendPostJoin(data) {
 export function sendPostLogin(data) {
   return apiClient.post("/userLogin", data);
 }
+
+// 세션 확인 요청 함수
+export function checkUserSession() {
+  return apiClient
+    .get("/userSessionInfo")
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
