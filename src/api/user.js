@@ -40,7 +40,7 @@ export function sendPostLogin(data) {
 // 세션 확인 요청 함수
 export function checkUserSession() {
   return apiClient
-    .get("/userSessionInfo")
+    .post("/userSessionInfo")
     .then((response) => response.data)
     .catch((error) => {
       throw error;
