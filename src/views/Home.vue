@@ -13,13 +13,20 @@
           <img src="@/assets/logo.png" alt="Mentors Logo" class="logo" />
           <h1 class="logo-text">Mentors</h1>
         </div>
-        <div class="auth-buttons">
+
+        <!-- 로그인 상태에 따른 버튼 표시 -->
+        <div class="auth-buttons" v-if="!isLoggedIn">
           <router-link to="/login">
             <button class="login-btn">로그인</button>
           </router-link>
           <router-link to="/signup">
             <button class="signup-btn">회원가입</button>
           </router-link>
+        </div>
+
+        <div v-else>
+          <span>{{ userName }}님 환영합니다!</span>
+          <button @click="logout" class="logout-btn">로그아웃</button>
         </div>
       </header>
 
@@ -34,6 +41,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import SideBar from "@/components/SideBar.vue";
 import FooterCom from "@/components/Footer.vue";
 
@@ -44,7 +52,11 @@ export default {
       isSidebarOpen: false, // 사이드바 열림 상태
     };
   },
+  computed: {
+    ...mapState(["isLoggedIn", "userName"]), // Vuex 상태를 가져옴
+  },
   methods: {
+    ...mapActions(["logout"]),
     toggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen; // 사이드바 열림/닫힘 상태 토글
     },

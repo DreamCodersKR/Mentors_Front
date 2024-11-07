@@ -60,34 +60,20 @@ export default {
       rememberMe: true,
     };
   },
-  // mounted() {
-  //   // Kakao SDK 초기화
-  //   if (window.Kakao && !window.Kakao.isInitialized()) {
-  //     window.Kakao.init("0873b78033e98d33faf4b7afe61e0039"); // 여기에 JavaScript 키 입력
-  //     console.log("Kakao SDK Initialized:", window.Kakao.isInitialized());
-  //   } else {
-  //     console.error("Kakao SDK 로드 실패");
-  //   }
-  // },
+
   methods: {
     login() {
       if (!this.email || !this.password) {
         alert("이메일과 비밀번호를 입력해주세요.");
         return;
       } else {
-        console.log("로그인 시도:", {
-          email: this.email,
-          password: this.password,
-          rememberMe: this.rememberMe,
-        });
         sendPostLogin({
           email: this.email,
           password: this.password,
         })
-          .then((response) => {
-            console.log("Response : ", response);
-            alert("로그인 완료");
+          .then(() => {
             this.checkSession();
+            alert("로그인 성공!");
             this.goToHome();
           })
           .catch((error) => {
@@ -105,9 +91,14 @@ export default {
     checkSession() {
       checkUserSession()
         .then((sessionData) => {
-          console.log("세션정보 : ", sessionData);
-          if (sessionData.userToken) {
-            console.log("세션에 토큰 확인됨 : ", sessionData.userToken);
+          console.log("세션 데이터 확인 : ", sessionData);
+          if (sessionData) {
+            // vuex (store 상태관리 처리)
+            this.$store.commit("setUser", {
+              userName: sessionData.userName,
+              userCategory: sessionData.userCategory,
+              userToken: sessionData.userToken,
+            });
           } else {
             console.log("세션 정보 없음");
           }
