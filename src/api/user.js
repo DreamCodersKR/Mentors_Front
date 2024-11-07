@@ -23,16 +23,16 @@ export function sendGetTestData(inputValue) {
 }
 
 // 로그인 API 호출 함수
-export function loginUser(credentials) {
-  return apiClient.post("/login", credentials);
-}
+// export function loginUser(credentials) {
+//   return apiClient.post("/login", credentials);
+// }
 
 // 회원가입 요청
 export function sendPostJoin(data) {
-  return apiClient.post("/userJoin",data);
+  return apiClient.post("/userJoin", data);
 }
 
 //로그인 요청
 export function sendPostLogin(data) {
-  return apiClient.post("/userLogin",data);
+  return apiClient.post("/userLogin", data);
 }

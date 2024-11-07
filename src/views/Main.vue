@@ -150,7 +150,7 @@ export default {
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 .category-info {
@@ -185,7 +185,7 @@ export default {
 .category-main-title {
   font-size: 1.125rem;
   font-weight: bold;
-  color: #666;
+  color: black;
   margin-bottom: 10px;
   white-space: pre-line;
 }

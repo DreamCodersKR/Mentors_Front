@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {sendPostLogin} from "../api/user";
+import { sendPostLogin } from "../api/user";
 export default {
   name: "LoginPage",
   data() {
@@ -74,36 +74,27 @@ export default {
       if (!this.email || !this.password) {
         alert("이메일과 비밀번호를 입력해주세요.");
         return;
-      }else{
+      } else {
+        console.log("로그인 시도:", {
+          email: this.email,
+          password: this.password,
+          rememberMe: this.rememberMe,
+        });
         sendPostLogin({
-        email:this.email,
-        password:this.password
+          email: this.email,
+          password: this.password,
         })
+          .then((response) => {
+            console.log("Response : ", response);
+            alert("로그인 완료");
+            this.goToHome();
+          })
+          .catch((error) => {
+            alert("로그인 실패!");
+            console.error("에러남 : ", error);
+          });
       }
-      // 로그인 로직 처리
-      console.log("로그인 시도:", {
-        email: this.email,
-        password: this.password,
-        rememberMe: this.rememberMe,
-      });
     },
-    // kakaoLogin() {
-    //   console.log(
-    //     "window.Kakao.Auth 값 : ",
-    //     window.Kakao.Auth.getAccessToken()
-    //   );
-
-    //   // 카카오 로그아웃 (기존 세션 초기화)
-    //   if (window.Kakao.Auth.getAccessToken() !== null) {
-    //     window.Kakao.Auth.logout(() => {
-    //       console.log("기존 카카오 세션 초기화");
-    //     });
-    //   }
-
-    //   // 새 창에서 카카오 로그인 호출
-    //   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=0873b78033e98d33faf4b7afe61e0039&redirect_uri=http://localhost:8081/kakaoLogin&response_type=code`;
-    //   window.open(kakaoAuthUrl, "KakaoLogin", "width=600,height=600");
-    // },
 
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
