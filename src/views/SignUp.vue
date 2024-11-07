@@ -15,7 +15,7 @@
           ><input
             type="radio"
             v-model="userCategory"
-            value="주니어"
+            value="j"
             name="userCategory"
             tabindex="0"
           />
@@ -25,7 +25,7 @@
           ><input
             type="radio"
             v-model="userCategory"
-            value="시니어"
+            value="s"
             name="userCategory"
             tabindex="0"
           />
