@@ -91,7 +91,13 @@ export default {
             this.goToHome();
           })
           .catch((error) => {
-            alert("로그인 실패!");
+            if (error.response && error.response.status === 401) {
+              alert("잘못된 이메일 또는 비밀번호입니다.");
+            } else if (error.response && error.response.status === 403) {
+              alert("토큰이 만료되었습니다. 다시 로그인 해주세요.");
+            } else {
+              alert("로그인 실패! 문제가 발생했습니다.");
+            }
             console.error("에러남 : ", error);
           });
       }
