@@ -29,10 +29,10 @@ export function loginUser(credentials) {
 
 // 회원가입 요청
 export function sendPostJoin(data) {
-  return apiClient.post("/UserJoin",data);
+  return apiClient.post("/userJoin",data);
 }
 
 //로그인 요청
 export function sendPostLogin(data) {
-  return apiClient.post("/UserLogin",data);
+  return apiClient.post("/userLogin",data);
 }
