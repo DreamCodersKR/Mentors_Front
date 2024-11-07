@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { writeBoard } from "@/api/user";
 import iconBoard from "@/components/icons/iconBoard.vue";
 export default {
   name: "WriteBoard",
@@ -40,12 +41,17 @@ export default {
       if (!this.title || !this.content) {
         alert("제목과 내용을 입력해 주세요.");
         return;
-      }
+      }else{
       // 게시글 등록 로직 추가
       console.log("등록할 게시글:", {
         title: this.title,
-        content: this.content,
+        content: this.content
       });
+      writeBoard({
+        title: this.title,
+        content: this.content
+      })
+    }
     },
     attachImage() {
       // 이미지 첨부 로직 추가
