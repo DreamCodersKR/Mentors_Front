@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { sendPostLogin } from "../api/user";
+import { sendPostLogin, checkUserSession } from "../api/user";
 export default {
   name: "LoginPage",
   data() {
@@ -87,6 +87,7 @@ export default {
           .then((response) => {
             console.log("Response : ", response);
             alert("로그인 완료");
+            this.checkSession();
             this.goToHome();
           })
           .catch((error) => {
@@ -95,7 +96,20 @@ export default {
           });
       }
     },
-
+    checkSession() {
+      checkUserSession()
+        .then((sessionData) => {
+          console.log("세션정보 : ", sessionData);
+          if (sessionData.userToken) {
+            console.log("세션에 토큰 확인됨 : ", sessionData.userToken);
+          } else {
+            console.log("세션 정보 없음");
+          }
+        })
+        .catch((error) => {
+          console.error("세션 확인중 오류발생 : ", error);
+        });
+    },
     goToHome() {
       this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
     },
