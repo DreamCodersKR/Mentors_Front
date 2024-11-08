@@ -8,12 +8,12 @@
       type="text"
       placeholder="제목을 입력해 주세요."
       class="title-input"
-      v-model="title"
+      v-model="boardTitle"
     />
     <textarea
       placeholder="내용을 입력하세요."
       class="content-input"
-      v-model="content"
+      v-model="boardContent"
     ></textarea>
     <div class="button-group">
       <button class="submit-btn" @click="submitPost">등록</button>
@@ -33,8 +33,8 @@ export default {
   },
   data() {
     return {
-      title: "",
-      content: "",
+      boardTitle: "",
+      boardContent: "",
       boardLikes: 0,
       boardViews: 0,
     };
@@ -44,13 +44,19 @@ export default {
   },
   methods: {
     submitPost() {
-      if (!this.title || !this.content) {
+      if (!this.userEmail) {
+        alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+        this.$router.push("/login");
+        return;
+      }
+
+      if (!this.boardTitle || !this.boardContent) {
         alert("제목과 내용을 입력해 주세요.");
         return;
       } else {
         writeBoard({
-          title: this.title,
-          content: this.content,
+          boardTitle: this.boardTitle,
+          boardContent: this.boardContent,
           boardLikes: this.boardLikes,
           boardViews: this.boardViews,
           userEmail: this.userEmail,
