@@ -53,7 +53,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLoggedIn", "userName"]), // Vuex 상태를 가져옴
+    ...mapState({
+      isLoggedIn: (state) => state.isLoggedIn,
+      userName: (state) => state.user.userName,
+    }), // Vuex 상태를 가져옴
   },
   methods: {
     ...mapActions(["logout"]),

@@ -6,16 +6,19 @@
     </div>
 
     <ul class="post-list">
-      <li v-for="post in posts" :key="post.id" class="post-item">
+      <li v-for="post in posts" :key="post.boardIdx" class="post-item">
         <img
           v-if="post.img == null"
           src="@/images/boardDefault.jpg"
           alt="boardImg"
           class="boardImg"
+          @click="goToDetail(post.boardIdx)"
         />
         <div class="post-wrap">
           <div class="post-header">
-            <h3 class="post-title">{{ post.boardTitle }}</h3>
+            <h3 class="post-title" @click="goToDetail(post.boardIdx)">
+              {{ post.boardTitle }}
+            </h3>
             <p class="post-meta">
               No. {{ post.boardIdx }} | {{ post.userNickname }} |
               {{ post.boardWriteDt }}
@@ -67,7 +70,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLoggedIn"]),
+    ...mapState({
+      isLoggedIn: (state) => state.isLoggedIn,
+      userNickname: (state) => state.user.nickName, // 사용자 닉네임 추가 접근
+    }),
   },
   methods: {
     goToWritePage() {
@@ -77,6 +83,9 @@ export default {
       } else {
         this.$router.push("/writeBoard");
       }
+    },
+    goToDetail(boardIdx) {
+      this.$router.push({ name: "boardDetail", params: { id: boardIdx } });
     },
     changePage(page) {
       this.currentPage = page;
@@ -129,6 +138,7 @@ export default {
   margin-right: 10px;
   display: inline-block;
   margin-right: 15px;
+  cursor: pointer;
 }
 .post-wrap {
   flex: 1;
@@ -170,6 +180,7 @@ button[type="button"].write-button {
 .post-title {
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .post-meta {
@@ -180,6 +191,12 @@ button[type="button"].write-button {
 .post-content {
   font-size: 16px;
   margin-top: 10px;
+  max-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .post-footer {

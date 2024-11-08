@@ -9,6 +9,7 @@ import BoardPage from "@/views/Board.vue";
 import PremiumPage from "@/views/Premium.vue";
 import WriteBoardPage from "@/views/WriteBoard.vue";
 import BoardDetailPage from "@/views/BoardDetail.vue";
+import store from "@/store";
 
 const routes = [
   {
@@ -41,9 +42,17 @@ const routes = [
         component: WriteBoardPage,
       },
       {
-        path: "boardDetail",
+        path: "board/:id",
         name: "boardDetail",
         component: BoardDetailPage,
+        beforeEnter: (to, from, next) => {
+          if (!store.state.isLoggedIn) {
+            alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+            next({ name: "Login" });
+          } else {
+            next();
+          }
+        },
       },
       {
         path: "premium",

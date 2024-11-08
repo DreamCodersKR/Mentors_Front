@@ -1,60 +1,65 @@
 import { createStore } from "vuex"; // Vuex 4 방식으로 import
 
-// 초기 상태 설정 함수
-const getDefaultState = () => {
+const state = {
+  isLoggedIn: false,
+  user: {
+    userName: null,
+    userEmail: null,
+    nickName: null,
+    userCategory: null,
+    userToken: null,
+    premiumYn: null,
+    mentorYn: null,
+  },
+};
+
+// sessionStorage에서 상태 불러오기
+function loadSession() {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  return {
-    isLoggedIn: user ? true : false,
-    userName: user ? user.userName : null,
-    userEmail: user ? user.userEmail : null,
-    nickName: user ? user.nickName : null,
-    userCategory: user ? user.userCategory : null,
-    userToken: user ? user.userToken : null,
-    premiumYn: user ? user.premiumYn : null,
-    mentorYn: user ? user.mentorYn : null,
-  };
+  if (user) {
+    return {
+      isLoggedIn: true,
+      user,
+    };
+  }
+  return state; // 기본값 반환
+}
+
+// sessionStorage 동기화 플러그인
+const sessionStorageSync = (store) => {
+  store.subscribe((mutation, state) => {
+    if (mutation.type === "setUser") {
+      sessionStorage.setItem("user", JSON.stringify(state.user));
+    } else if (mutation.type === "clearUser") {
+      sessionStorage.removeItem("user");
+    }
+  });
 };
 
 export default createStore({
-  state: getDefaultState(), // 앱 로드 시 sessionStorage 상태를 기본값으로
+  state: loadSession(), // sessionStorage 데이터로 초기화
   mutations: {
     setUser(state, payload) {
       state.isLoggedIn = true;
-      state.userName = payload.userName;
-      state.userEmail = payload.userEmail;
-      state.nickName = payload.nickName;
-      state.userCategory = payload.userCategory;
-      state.userToken = payload.userToken;
-      state.premiumYn = payload.premiumYn;
-      state.mentorYn = payload.mentorYn;
-
-      // sessionStorage에 사용자 상태 저장
-      sessionStorage.setItem("user", JSON.stringify(payload));
+      state.user = { ...payload }; // 사용자 데이터를 객체로 한번에 관리
     },
     clearUser(state) {
       state.isLoggedIn = false;
-      state.userName = null;
-      state.userEmail = null;
-      state.nickName = null;
-      state.userCategory = null;
-      state.userToken = null;
-      state.premiumYn = null;
-      state.mentorYn = null;
-
-      // sessionStorage에서 사용자 정보 제거
-      sessionStorage.removeItem("user");
+      state.user = {
+        ...state.user,
+        ...state.user,
+        userName: null,
+        userEmail: null,
+      }; // 상태 초기화
     },
   },
   actions: {
-    // 비동기 작업 정의
     login({ commit }, userData) {
-      commit("setUser", userData); // 로그인 후 사용자 정보 커밋
+      commit("setUser", userData);
     },
     logout({ commit }) {
-      commit("clearUser"); // 로그아웃 시 사용자 정보 초기화
+      commit("clearUser");
     },
   },
-  modules: {
-    // 모듈로 스토어 분리 하기
-  },
+  plugins: [sessionStorageSync], // sessionStorage 동기화
 });

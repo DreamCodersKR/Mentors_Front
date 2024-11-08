@@ -40,7 +40,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userEmail"]),
+    ...mapState({
+      userEmail: (state) => state.user.userEmail,
+    }),
   },
   methods: {
     submitPost() {

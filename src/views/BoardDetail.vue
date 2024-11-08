@@ -1,36 +1,51 @@
 <template>
   <div class="board-detail-container">
+    <div class="board-top" @click="goToBoard">
+      <icon-board />
+      <h2>자유게시판</h2>
+    </div>
     <!-- 게시글 상단 정보 -->
     <div class="board-header">
-      <h2 class="board-title">[공지] 게시판 이용 안내</h2>
+      <h3 class="board-title">{{ board.boardTitle }}</h3>
       <div class="board-meta">
-        <span class="author">운영팀</span>
-        <span class="date">2024.11.01 15:27</span>
-        <span class="meta-info">조회수 13 | 댓글 7 | 좋아요 7</span>
+        <span class="author">{{ board.userNickname }}</span>
+        <span class="date">{{ board.boardWriteDt }}</span>
+        <span class="meta-info"
+          >조회수 {{ board.boardViews }} | 댓글 {{ board.commentCount }} |
+          좋아요 {{ board.boardLikes }}</span
+        >
       </div>
     </div>
 
     <!-- 게시글 내용 -->
     <div class="board-content">
-      모두가 이용하는 자유게시판입니다. 여러분들의 아름다운 매너를 보여주세요!
-      남을 비방하거나 악플은 삼가해주시길 바랍니다.
+      {{ board.boardContent }}
     </div>
 
     <!-- 좋아요 버튼 -->
     <div class="like-button-container">
-      <button class="like-button">💜 좋아요 7</button>
+      <button class="like-button">💜 좋아요 {{ board.boardLikes }}</button>
     </div>
 
     <!-- 댓글 섹션 -->
     <div class="comment-section">
       <h3>댓글</h3>
-      <ul class="comment-list">
-        <li v-for="comment in comments" :key="comment.id" class="comment-item">
+      <div v-if="comments.length === 0" class="no-comments">
+        댓글이 없습니다. 첫 댓글을 남겨보세요!
+      </div>
+      <ul v-else class="comment-list">
+        <li
+          v-for="comment in comments"
+          :key="comment.commentIdx"
+          class="comment-item"
+        >
           <div class="comment-header">
-            <span class="comment-author">{{ comment.author }}</span>
-            <span class="comment-date">{{ comment.date }}</span>
+            <span class="comment-author">{{
+              comment.userNickname || "익명"
+            }}</span>
+            <span class="comment-date">{{ comment.commentDate }}</span>
           </div>
-          <div class="comment-content">{{ comment.content }}</div>
+          <div class="comment-content">{{ comment.commentContent }}</div>
         </li>
       </ul>
 
@@ -59,33 +74,106 @@
 </template>
 
 <script>
-import comments from "@/datas/CommentsExample";
+import iconBoard from "@/components/icons/iconBoard.vue";
+import { addComment, getBoardDetail, getComments } from "@/api/board";
+import { mapState } from "vuex";
 
 export default {
   name: "BoardDetail",
   data() {
     return {
-      comments: comments,
+      board: {},
+      comments: [],
       newComment: "",
       currentPage: 1,
-      totalPages: 4,
+      totalPages: 1,
     };
+  },
+  created() {
+    const boardId = this.$route.params.id;
+    this.loadBoardDetail(boardId);
+    this.loadComments(boardId);
+  },
+  computed: {
+    ...mapState({
+      isLoggedIn: (state) => state.isLoggedIn,
+      userEmail: (state) => state.user.userEmail,
+      userNickname: (state) => state.user.nickName,
+    }),
   },
   methods: {
     addComment() {
-      if (this.newComment.trim() === "") return;
-      this.comments.push({
-        id: this.comments.length + 1,
-        author: "현재 사용자",
-        date: new Date().toLocaleString(),
-        content: this.newComment,
-      });
-      this.newComment = "";
+      if (this.newComment.trim() === "") {
+        alert("댓글 내용을 입력해 주세요!");
+        return;
+      }
+      const commentData = {
+        boardIdx: this.$route.params.id,
+        commentContent: this.newComment,
+        userEmail: this.userEmail,
+      };
+      addComment(commentData)
+        .then(() => {
+          alert("댓글이 성공적으로 등록되었습니다!");
+          this.newComment = "";
+          this.loadComments(this.$route.params.id);
+        })
+        .catch((error) => {
+          console.error("댓글 등록 실패: ", error);
+          alert("댓글 등록에 실패했습니다. 다시 시도해주세요.");
+        });
+    },
+    changeTimeStamp(timestamp) {
+      const [date, time] = timestamp.split("T");
+      return `${date} ${time}`;
+    },
+    // 댓글 목록 불러오기
+    loadComments(boardId) {
+      getComments(boardId) // API 호출
+        .then((response) => {
+          if (response && response.length > 0) {
+            this.comments = response.map((comment) => {
+              comment.commentDate = this.changeTimeStamp(comment.commentDate);
+              return comment;
+            });
+          } else {
+            this.comments = []; // 댓글 없을 경우 초기화
+          }
+        })
+        .catch((error) => {
+          console.error("댓글 불러오기 실패: ", error);
+          alert("댓글을 불러오는 데 실패했습니다. 다시 시도해주세요.");
+        });
+    },
+
+    loadBoardDetail(boardId) {
+      getBoardDetail(boardId)
+        .then((data) => {
+          this.board = data;
+          this.board.boardWriteDt = this.changeTimeStamp(
+            this.board.boardWriteDt
+          );
+        })
+        .catch((error) => {
+          alert("게시글을 불러오는 데 실패했습니다.");
+          console.error(error);
+        });
+    },
+    goToBoard() {
+      this.$router.push("/board");
     },
     changePage(page) {
       this.currentPage = page;
+      this.loadComments(this.$route.params.id);
       // 페이지 변경 로직 추가
     },
+    likeBoard() {
+      // 좋아요 기능만들어야됨
+      alert("좋아요 기능준비중임!");
+    },
+  },
+  components: {
+    iconBoard,
   },
 };
 </script>
@@ -95,6 +183,15 @@ export default {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+}
+.board-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+h2 {
+  margin-left: 10px;
 }
 
 .board-header {
@@ -135,6 +232,13 @@ export default {
   cursor: pointer;
 }
 
+.no-comments {
+  text-align: center;
+  color: gray;
+  font-style: italic;
+  margin-top: 20px;
+}
+
 .comment-section {
   margin-top: 20px;
 }
@@ -162,6 +266,8 @@ export default {
 
 .comment-content {
   font-size: 16px;
+  word-wrap: break-word; /* 긴 단어 줄바꿈 */
+  white-space: pre-wrap; /* 공백과 줄바꿈 유지 */
 }
 
 .pagination {
