@@ -51,6 +51,7 @@
 <script>
 import boards from "@/datas/BoardExample";
 import iconBoard from "@/components/icons/iconBoard.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "BoardPage",
@@ -64,9 +65,17 @@ export default {
       totalPages: 4, // 총 페이지 수가 4일때,
     };
   },
+  computed: {
+    ...mapState(["isLoggedIn"]),
+  },
   methods: {
     goToWritePage() {
-      this.$router.push("/writeBoard");
+      if (!this.isLoggedIn) {
+        alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/writeBoard");
+      }
     },
     changePage(page) {
       this.currentPage = page;

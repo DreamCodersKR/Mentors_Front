@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import { writeBoard } from "@/api/user";
+import { writeBoard } from "@/api/board";
+import { mapState } from "vuex";
 import iconBoard from "@/components/icons/iconBoard.vue";
 export default {
   name: "WriteBoard",
@@ -34,24 +35,35 @@ export default {
     return {
       title: "",
       content: "",
+      boardLikes: 0,
+      boardViews: 0,
     };
+  },
+  computed: {
+    ...mapState(["userEmail"]),
   },
   methods: {
     submitPost() {
       if (!this.title || !this.content) {
         alert("제목과 내용을 입력해 주세요.");
         return;
-      }else{
-      // 게시글 등록 로직 추가
-      console.log("등록할 게시글:", {
-        title: this.title,
-        content: this.content
-      });
-      writeBoard({
-        title: this.title,
-        content: this.content
-      })
-    }
+      } else {
+        writeBoard({
+          title: this.title,
+          content: this.content,
+          boardLikes: this.boardLikes,
+          boardViews: this.boardViews,
+          userEmail: this.userEmail,
+        })
+          .then(() => {
+            alert("게시글이 등록되었습니다.");
+            this.$router.push("/board");
+          })
+          .catch((error) => {
+            console.error("글쓰기 실패", error);
+            alert("게시글 등록에 실패했습니다!!");
+          });
+      }
     },
     attachImage() {
       // 이미지 첨부 로직 추가
@@ -76,6 +88,7 @@ export default {
   align-items: center;
   margin-bottom: 20px;
   cursor: pointer;
+  width: 150px;
 }
 
 h2 {

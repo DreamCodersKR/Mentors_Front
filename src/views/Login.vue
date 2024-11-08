@@ -96,6 +96,7 @@ export default {
             // vuex (store 상태관리 처리)
             this.$store.commit("setUser", {
               userName: sessionData.userName,
+              userEmail: sessionData.userEmail,
               nickName: sessionData.nickname,
               userCategory: sessionData.userCategory,
               userToken: sessionData.userToken,

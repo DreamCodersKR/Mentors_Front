@@ -6,6 +6,7 @@ const getDefaultState = () => {
   return {
     isLoggedIn: user ? true : false,
     userName: user ? user.userName : null,
+    userEmail: user ? user.userEmail : null,
     nickName: user ? user.nickName : null,
     userCategory: user ? user.userCategory : null,
     userToken: user ? user.userToken : null,
@@ -20,6 +21,7 @@ export default createStore({
     setUser(state, payload) {
       state.isLoggedIn = true;
       state.userName = payload.userName;
+      state.userEmail = payload.userEmail;
       state.nickName = payload.nickName;
       state.userCategory = payload.userCategory;
       state.userToken = payload.userToken;
@@ -32,6 +34,7 @@ export default createStore({
     clearUser(state) {
       state.isLoggedIn = false;
       state.userName = null;
+      state.userEmail = null;
       state.nickName = null;
       state.userCategory = null;
       state.userToken = null;

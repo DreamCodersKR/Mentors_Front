@@ -22,11 +22,6 @@ export function sendGetTestData(inputValue) {
     });
 }
 
-// 로그인 API 호출 함수
-// export function loginUser(credentials) {
-//   return apiClient.post("/login", credentials);
-// }
-
 // 회원가입 요청
 export function sendPostJoin(data) {
   return apiClient.post("/userJoin", data);
@@ -41,16 +36,6 @@ export function sendPostLogin(data) {
 export function checkUserSession() {
   return apiClient
     .get("/userSessionInfo")
-    .then((response) => response.data)
-    .catch((error) => {
-      throw error;
-    });
-}
-
-// 게시글 작성 요청 
-export function writeBoard(data) {
-  return apiClient
-    .post("/writeBoard",data)
     .then((response) => response.data)
     .catch((error) => {
       throw error;
