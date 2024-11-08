@@ -15,16 +15,17 @@
         />
         <div class="post-wrap">
           <div class="post-header">
-            <h3 class="post-title">{{ post.title }}</h3>
+            <h3 class="post-title">{{ post.boardTitle }}</h3>
             <p class="post-meta">
-              No. {{ post.id }} | {{ post.author }} | {{ post.date }}
+              No. {{ post.boardIdx }} | {{ post.userNickname }} |
+              {{ post.boardWriteDt }}
             </p>
           </div>
-          <p class="post-content">{{ post.content }}</p>
+          <p class="post-content">{{ post.boardContent }}</p>
           <div class="post-footer">
-            <span>조회수 {{ post.views }}</span>
-            <span>댓글 {{ post.comments }}</span>
-            <span>좋아요 {{ post.likes }}</span>
+            <span>조회수 {{ post.boardViews }}</span>
+            <span>댓글 {{ post.commentCount }}</span>
+            <span>좋아요 {{ post.boardLikes }}</span>
           </div>
         </div>
       </li>
@@ -49,9 +50,9 @@
 </template>
 
 <script>
-import boards from "@/datas/BoardExample";
 import iconBoard from "@/components/icons/iconBoard.vue";
 import { mapState } from "vuex";
+import { getBoardList } from "@/api/board";
 
 export default {
   name: "BoardPage",
@@ -60,9 +61,9 @@ export default {
   },
   data() {
     return {
-      posts: boards,
+      posts: [],
       currentPage: 1, // 현재페이지 1일때,
-      totalPages: 4, // 총 페이지 수가 4일때,
+      totalPages: 1, // 총 페이지 수가 4일때,
     };
   },
   computed: {
@@ -80,7 +81,30 @@ export default {
     changePage(page) {
       this.currentPage = page;
       // 페이지 변경에 따라 posts 데이터를 다시 불러올 수도 있음
+      this.loadPosts();
     },
+    changeTimeStamp(timestamp) {
+      const [date, time] = timestamp.split("T");
+      return `${date} ${time}`;
+    },
+    loadPosts() {
+      getBoardList()
+        .then((data) => {
+          const responseData = data;
+          responseData.map((board) => {
+            board.boardWriteDt = this.changeTimeStamp(board.boardWriteDt);
+          });
+          console.log("responseData : ", responseData);
+          this.posts = responseData;
+        })
+        .catch((error) => {
+          console.log("게시글 목록 불러오기 실패 : ", error);
+          alert("게시글 목록을 불러오지 못했습니다.");
+        });
+    },
+  },
+  created() {
+    this.loadPosts(); // 컴포넌트가 생성될 때 게시글 목록 로드함
   },
 };
 </script>

@@ -9,3 +9,13 @@ export function writeBoard(data) {
       throw error;
     });
 }
+
+// 게시글 전체 조회
+export function getBoardList() {
+  return apiClient
+    .get(`/boardList`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw error;
+    });
+}
