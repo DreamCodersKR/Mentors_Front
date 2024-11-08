@@ -6,8 +6,11 @@ const getDefaultState = () => {
   return {
     isLoggedIn: user ? true : false,
     userName: user ? user.userName : null,
+    nickName: user ? user.nickName : null,
     userCategory: user ? user.userCategory : null,
     userToken: user ? user.userToken : null,
+    premiumYn: user ? user.premiumYn : null,
+    mentorYn: user ? user.mentorYn : null,
   };
 };
 
@@ -17,8 +20,11 @@ export default createStore({
     setUser(state, payload) {
       state.isLoggedIn = true;
       state.userName = payload.userName;
+      state.nickName = payload.nickName;
       state.userCategory = payload.userCategory;
       state.userToken = payload.userToken;
+      state.premiumYn = payload.premiumYn;
+      state.mentorYn = payload.mentorYn;
 
       // sessionStorage에 사용자 상태 저장
       sessionStorage.setItem("user", JSON.stringify(payload));
@@ -26,8 +32,11 @@ export default createStore({
     clearUser(state) {
       state.isLoggedIn = false;
       state.userName = null;
+      state.nickName = null;
       state.userCategory = null;
       state.userToken = null;
+      state.premiumYn = null;
+      state.mentorYn = null;
 
       // sessionStorage에서 사용자 정보 제거
       sessionStorage.removeItem("user");

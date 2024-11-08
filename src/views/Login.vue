@@ -71,7 +71,8 @@ export default {
           email: this.email,
           password: this.password,
         })
-          .then(() => {
+          .then((response) => {
+            console.log("response : ", response);
             this.checkSession();
             alert("로그인 성공!");
             this.goToHome();
@@ -82,7 +83,7 @@ export default {
             } else if (error.response && error.response.status === 403) {
               alert("토큰이 만료되었습니다. 다시 로그인 해주세요.");
             } else {
-              alert("로그인 실패! 문제가 발생했습니다.");
+              alert("로그인 실패! 존재하지 않는 이메일 입니다.");
             }
             console.error("에러남 : ", error);
           });
@@ -91,13 +92,15 @@ export default {
     checkSession() {
       checkUserSession()
         .then((sessionData) => {
-          console.log("세션 데이터 확인 : ", sessionData);
           if (sessionData) {
             // vuex (store 상태관리 처리)
             this.$store.commit("setUser", {
               userName: sessionData.userName,
+              nickName: sessionData.nickname,
               userCategory: sessionData.userCategory,
               userToken: sessionData.userToken,
+              premiumYn: sessionData.premiumYn,
+              mentorYn: sessionData.mentorYn,
             });
           } else {
             console.log("세션 정보 없음");
