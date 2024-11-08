@@ -46,3 +46,14 @@ export function getComments(boardIdx) {
       throw error;
     });
 }
+
+// 게시물 삭제
+export function boardDelete(boardIdx) {
+  return apiClient
+    .get(`/boardDelete/${boardIdx}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("게시물 삭제 실패: ", error);
+      throw error;
+    });
+}
