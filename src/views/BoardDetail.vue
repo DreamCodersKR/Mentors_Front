@@ -82,6 +82,7 @@ import {
   getBoardDetail,
   getComments,
   likeBoard,
+  increaseViewCount,
 } from "@/api/board";
 import { mapState } from "vuex";
 
@@ -100,6 +101,7 @@ export default {
     const boardId = this.$route.params.id;
     this.loadBoardDetail(boardId);
     this.loadComments(boardId);
+    this.incrementViewCount(boardId);
   },
   computed: {
     ...mapState({
@@ -194,6 +196,15 @@ export default {
         .catch((error) => {
           console.error("좋아요 처리 실패: ", error);
           alert("좋아요 처리에 실패했습니다. 다시 시도해주세요.");
+        });
+    },
+    incrementViewCount(boardId) {
+      increaseViewCount(boardId)
+        .then(() => {
+          console.log("조회수가 성공적으로 증가했습니다.");
+        })
+        .catch((error) => {
+          console.error("조회수 증가 실패: ", error);
         });
     },
   },

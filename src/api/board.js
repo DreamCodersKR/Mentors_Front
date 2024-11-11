@@ -68,3 +68,13 @@ export function likeBoard(boardIdx) {
       throw error;
     });
 }
+
+export function increaseViewCount(boardId) {
+  return apiClient
+    .get(`/board/increase/${boardId}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("조회수 증가 요청 실패: ", error);
+      throw error;
+    });
+}
