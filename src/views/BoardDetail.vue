@@ -24,7 +24,9 @@
 
     <!-- 좋아요 버튼 -->
     <div class="like-button-container">
-      <button class="like-button">💜 좋아요 {{ board.boardLikes }}</button>
+      <button class="like-button" @click="likeBoard">
+        💜 좋아요 {{ board.boardLikes }}
+      </button>
     </div>
 
     <!-- 댓글 섹션 -->
@@ -75,7 +77,12 @@
 
 <script>
 import iconBoard from "@/components/icons/iconBoard.vue";
-import { addComment, getBoardDetail, getComments } from "@/api/board";
+import {
+  addComment,
+  getBoardDetail,
+  getComments,
+  likeBoard,
+} from "@/api/board";
 import { mapState } from "vuex";
 
 export default {
@@ -168,8 +175,26 @@ export default {
       // 페이지 변경 로직 추가
     },
     likeBoard() {
-      // 좋아요 기능만들어야됨
-      alert("좋아요 기능준비중임!");
+      if (!this.isLoggedIn) {
+        alert("로그인 후 이용 가능합니다.");
+        return;
+      }
+
+      likeBoard(this.$route.params.id) // API 호출
+        .then((response) => {
+          console.log("response : ", response);
+
+          if (response.updatedLikes !== undefined) {
+            this.board.boardLikes = response.updatedLikes; // 반환된 갱신된 좋아요 수를 반영
+            alert(response.message); // 서버 메시지 표시
+          } else {
+            alert("알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+          }
+        })
+        .catch((error) => {
+          console.error("좋아요 처리 실패: ", error);
+          alert("좋아요 처리에 실패했습니다. 다시 시도해주세요.");
+        });
     },
   },
   components: {

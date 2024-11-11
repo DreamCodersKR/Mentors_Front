@@ -110,7 +110,7 @@ export default {
 
 .main-banner {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1460px;
   padding: 60px 20px;
   background-image: url("@/images/mainImg.png");
   background-size: cover;
@@ -123,7 +123,7 @@ export default {
 
 .cont-wrap {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   padding: 20px;
 }
 
