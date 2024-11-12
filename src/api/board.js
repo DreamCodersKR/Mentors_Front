@@ -57,3 +57,24 @@ export function boardDelete(boardIdx) {
       throw error;
     });
 }
+
+// 게시글 좋아요 요청
+export function likeBoard(boardIdx) {
+  return apiClient
+    .post(`/board/like/${boardIdx}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("좋아요 요청 실패: ", error);
+      throw error;
+    });
+}
+
+export function increaseViewCount(boardId) {
+  return apiClient
+    .get(`/board/increase/${boardId}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error("조회수 증가 요청 실패: ", error);
+      throw error;
+    });
+}

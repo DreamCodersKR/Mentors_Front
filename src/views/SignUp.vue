@@ -207,8 +207,12 @@ export default {
             this.goToHome();
           })
           .catch((error) => {
-            alert("회원가입 실패!");
-            console.error("에러남 : ", error);
+            if (error.response && error.response.status === 409) {
+              alert("이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.");
+            } else {
+              alert("회원가입 실패! 다시 시도해주세요.");
+              console.error("에러남 : ", error);
+            }
           });
       }
     },
@@ -362,5 +366,9 @@ input[type="date"] {
   box-shadow: none;
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.error-msg {
+  color: red;
 }
 </style>

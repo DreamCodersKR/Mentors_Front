@@ -9,12 +9,13 @@ import BoardPage from "@/views/Board.vue";
 import PremiumPage from "@/views/Premium.vue";
 import WriteBoardPage from "@/views/WriteBoard.vue";
 import BoardDetailPage from "@/views/BoardDetail.vue";
+import QuestionsPage from "@/views/Questions.vue";
 import store from "@/store";
 
 const routes = [
   {
     path: "/",
-    component: HomePage, // 기본 레이아웃을 HomePage로 설정
+    component: HomePage,
     children: [
       {
         path: "",
@@ -59,6 +60,12 @@ const routes = [
         name: "premium",
         component: PremiumPage,
       },
+      {
+        path: "questions/category/:categoryIdx",
+        name: "questions",
+        component: QuestionsPage,
+        props: true,
+      },
     ],
   },
   {
@@ -74,7 +81,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.VUE_APP_BASE_URL), // Vue Router 4 방식으로 history 설정
+  history: createWebHistory(process.env.VUE_APP_BASE_URL),
   routes,
 });
 

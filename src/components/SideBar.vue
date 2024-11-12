@@ -1,52 +1,32 @@
 <template>
   <div :class="['sidebar', { 'is-open': isSidebarOpen }]">
-    <!-- MenuButton 컴포넌트 -->
     <MenuButton
       :isSidebarOpen="isSidebarOpen"
       @toggle-sidebar="toggleSidebar"
     />
-
-    <!-- 사이드바 메뉴 -->
     <div class="menus">
       <ul v-if="isSidebarOpen">
-        <!-- 카테고리 트리 -->
         <li class="menu-item">
           <div @click="toggleCategory" class="menu-title">
             <iconCategories />카테고리
           </div>
           <transition name="categoryEffect">
             <ul v-if="isCategoryOpen" class="sub-menu">
-              <li>
-                <router-link to="/"><iconEducation />학업/교육</router-link>
-              </li>
-              <li>
-                <router-link to="/"><iconCarrier />취업/커리어</router-link>
-              </li>
-              <li>
-                <router-link to="/"><iconIT />IT/전문기술</router-link>
-              </li>
-              <li>
-                <router-link to="/"
-                  ><iconImprovement />성장/자기관리</router-link
+              <li v-for="category in categories" :key="category.category_idx">
+                <!-- 경로에 category_idx 전달 -->
+                <router-link
+                  :to="{
+                    name: 'questions',
+                    params: { categoryIdx: category.category_idx },
+                  }"
                 >
-              </li>
-              <li>
-                <router-link to="/"><iconEconomy />금융/경제</router-link>
-              </li>
-              <li>
-                <router-link to="/"><iconArt />예술/취미</router-link>
-              </li>
-              <li>
-                <router-link to="/"><iconEtc />기타</router-link>
+                  <component :is="category.icon" />
+                  {{ category.category_name }}
+                </router-link>
               </li>
             </ul>
           </transition>
         </li>
-        <!-- <li class="menu-item">
-          <router-link to="/premium"
-            ><iconPremium />프리미엄 멘토링</router-link
-          >
-        </li> -->
         <li class="menu-item">
           <router-link to="/test"><iconChatting />채팅목록</router-link>
         </li>
@@ -63,7 +43,7 @@
 
 <script>
 import MenuButton from "@/components/MenuButton.vue";
-//icon------------------------------
+// Icons
 import iconArt from "@/components/icons/iconArt.vue";
 import iconCarrier from "@/components/icons/iconCarrier.vue";
 import iconCategories from "@/components/icons/iconCategories.vue";
@@ -75,15 +55,11 @@ import iconIT from "@/components/icons/iconIT.vue";
 import iconChatting from "@/components/icons/iconChatting.vue";
 import iconBoard from "@/components/icons/iconBoard.vue";
 import iconAbout from "@/components/icons/iconAbout.vue";
-// import iconPremium from "@/components/icons/iconPremium.vue";
-
-//-----------------------------------
 
 export default {
   name: "SideBar",
   components: {
     MenuButton,
-    //sidebar icon 컴포넌트
     iconArt,
     iconCarrier,
     iconCategories,
@@ -95,7 +71,6 @@ export default {
     iconChatting,
     iconBoard,
     iconAbout,
-    // iconPremium,
   },
   props: {
     isSidebarOpen: {
@@ -105,7 +80,20 @@ export default {
   },
   data() {
     return {
-      isCategoryOpen: false, // 카테고리 트리 열림/닫힘 상태
+      isCategoryOpen: false,
+      categories: [
+        { category_idx: 1, category_name: "학업/교육", icon: "iconEducation" },
+        { category_idx: 2, category_name: "경력/직업", icon: "iconCarrier" },
+        { category_idx: 3, category_name: "IT/전문기술", icon: "iconIT" },
+        { category_idx: 4, category_name: "금융/경제", icon: "iconEconomy" },
+        {
+          category_idx: 5,
+          category_name: "성장/자기관리",
+          icon: "iconImprovement",
+        },
+        { category_idx: 6, category_name: "예술/취미", icon: "iconArt" },
+        { category_idx: 7, category_name: "기타", icon: "iconEtc" },
+      ],
     };
   },
   methods: {
@@ -114,7 +102,7 @@ export default {
       this.isCategoryOpen = false;
     },
     toggleCategory() {
-      this.isCategoryOpen = !this.isCategoryOpen; // 카테고리 트리 토글
+      this.isCategoryOpen = !this.isCategoryOpen;
     },
   },
 };
