@@ -1,15 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-banner">
-      <div class="text-content">
-        <h1 class="title">멘토와 멘티,<br />그 연결의 시작은 '멘토스'에서</h1>
-        <p class="subtitle">
-          멘토스는 AI 맞춤 멘토링 서비스를 제공 합니다.<br />
-          풍부한 경험과 지식을 소유한 ‘시니어 멘토’<br />
-          트렌디한 감각을 가진 ‘주니어 멘토’<br />
-          모두 멘토스에서 만나보세요.
-        </p>
-      </div>
+      <Slider/>
     </div>
 
     <!-- 카테고리 카드 -->
@@ -79,6 +71,7 @@ import iconEconomy from "@/components/icons/iconEconomy.vue";
 import iconImprovement from "@/components/icons/iconImprovement.vue";
 import iconArt from "@/components/icons/iconArt.vue";
 import iconEtc from "@/components/icons/iconEtc.vue";
+import Slider from "@/components/Slider.vue"
 
 export default {
   name: "MainPage",
@@ -96,6 +89,7 @@ export default {
     iconImprovement,
     iconArt,
     iconEtc,
+    Slider,
   },
 };
 </script>
@@ -111,14 +105,12 @@ export default {
 .main-banner {
   width: 100%;
   max-width: 1460px;
-  padding: 60px 20px;
-  background-image: url("@/images/mainImg.png");
+  margin-top : -10px;
   background-size: cover;
   background-position: center;
   border-radius: 16px;
   color: white;
   text-align: left;
-  margin-bottom: 40px;
 }
 
 .cont-wrap {
