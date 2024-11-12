@@ -1,67 +1,124 @@
 <template>
   <div class="category-detail-container">
     <h2 class="category-title">{{ categoryTitle }}</h2>
-    <p class="category-description">
-      AI 매칭을 위한 질문들 입니다. 더욱 완벽한 매칭을 위해 답변을 입력해주세요.
-      답변이 자세할수록 매칭 정확도가 올라갑니다!
-    </p>
-    <div class="question-list">
-      <div class="question-item" v-for="index in 3" :key="index">
-        <h3 class="question-title">
-          Q {{ dummyQuestions[index - 1].content }}
-        </h3>
-        <textarea
-          class="question-input"
-          :placeholder="dummyQuestions[index - 1].placeholder"
-        ></textarea>
-      </div>
+    <div class="subcategories">
+      <button
+        v-for="subCategory in subCategories"
+        :key="subCategory.subCategoryIdx"
+        @click="selectSubCategory(subCategory)"
+        :class="{
+          active:
+            selectedSubCategory &&
+            selectedSubCategory.subCategoryIdx === subCategory.subCategoryIdx,
+        }"
+      >
+        {{ subCategory.subCategoryName }}
+      </button>
     </div>
-    <button class="action-button matching-button">Matching</button>
-    <button class="action-button chatroom-button">멘토링 채팅방 만들기</button>
+    <p class="category-description">
+      {{
+        selectedSubCategory
+          ? "AI 매칭을 위한 질문들 입니다. 더욱 완벽한 매칭을 위해 답변을 입력해주세요. 답변이 자세할수록 매칭 정확도가 올라갑니다!"
+          : "서브 카테고리를 선택하시면 질문지가 나옵니다!"
+      }}
+    </p>
+    <transition name="fade">
+      <div class="question-list" v-if="questions.length > 0">
+        <div
+          class="question-item"
+          v-for="question in questions"
+          :key="question.questionIdx"
+        >
+          <h3 class="question-title">Q {{ question.questionContent }}</h3>
+          <textarea
+            class="question-input"
+            :placeholder="question.placeholder"
+          ></textarea>
+        </div>
+      </div>
+    </transition>
+
+    <button
+      v-if="userType === 'N' && selectedSubCategory"
+      class="action-button matching-button"
+      @click="submitMatching"
+    >
+      멘티등록
+    </button>
+    <button
+      v-else-if="userType === 'Y' && selectedSubCategory"
+      class="action-button chatroom-button"
+      @click="createChatroom"
+    >
+      멘토등록
+    </button>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { fetchCategorys } from "@/api/categorys";
+import { fetchQuestions } from "@/api/questions";
+
 export default {
   name: "QuestionsPage",
   props: ["categoryIdx"],
+
   data() {
     return {
-      dummyQuestions: [
-        {
-          content:
-            "멘티님께서 학업/교육 분야에서 쌓은 경험을 간단히 알려주실 수 있나요?",
-          placeholder:
-            "직무 경험, 학습 경험, 참여했던 프로젝트 등을 간단히 입력해주세요.",
-        },
-        {
-          content:
-            "멘토링을 통해 학업/교육 관련 어떤 점을 배우고 싶으신지 말씀해 주실 수 있나요?",
-          placeholder: "예) 자기계발, 리더십 향상, 새로운 기술 습득 등",
-        },
-        {
-          content: "멘티님의 현재 학습능력을 간단히 예시와 같이 표현해 주세요.",
-          placeholder: "예) 초급, 중급, 고급 중 선택하여 기재해주세요.",
-        },
-      ],
       categoryTitle: "",
+      subCategories: [],
+      selectedSubCategory: null,
+      questions: [],
     };
   },
-  created() {
-    this.setCategoryTitle(this.categoryIdx);
+
+  computed: {
+    ...mapState({
+      userType: (state) => state.user.mentorYn,
+    }),
   },
+
+  created() {
+    this.checkLoginStatus();
+    this.loadCategoryDetails(); // API 호출
+  },
+
   methods: {
-    setCategoryTitle(categoryIdx) {
-      const categoryMap = {
-        1: "학업/교육",
-        2: "경력/직업",
-        3: "IT/전문기술",
-        4: "금융/경제",
-        5: "성장/자기관리",
-        6: "예술/취미",
-        7: "기타",
-      };
-      this.categoryTitle = categoryMap[categoryIdx] || "알 수 없는 카테고리";
+    async selectSubCategory(subCategory) {
+      this.selectedSubCategory = subCategory;
+      await this.loadQuestions(subCategory.subCategoryIdx);
+    },
+    submitMatching() {
+      alert("매칭 요청이 완료되었습니다!");
+    },
+    createChatroom() {
+      alert("멘토링 채팅방이 생성되었습니다!");
+    },
+    checkLoginStatus() {
+      if (!this.$store.state.isLoggedIn) {
+        alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+        this.$router.push("/login");
+      }
+    },
+    async loadCategoryDetails() {
+      try {
+        const data = await fetchCategorys(this.categoryIdx); // API 호출
+        this.categoryTitle = data.categoryName; // 카테고리 제목 설정
+        this.subCategories = data.subCategories; // 하위 카테고리 저장
+      } catch (error) {
+        alert("카테고리를 불러오는 데 실패했습니다.");
+        console.error(error);
+      }
+    },
+    async loadQuestions() {
+      try {
+        const data = await fetchQuestions(this.categoryIdx, this.userType); // API 호출
+        this.questions = data;
+      } catch (error) {
+        alert("카테고리를 불러오는 데 실패했습니다.");
+        console.error(error);
+      }
     },
   },
 };
@@ -79,6 +136,25 @@ export default {
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+}
+.subcategories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.subcategories button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  transition: all 0.3s;
+}
+.subcategories button.active {
+  background-color: #2196f3;
+  color: white;
 }
 .category-description {
   font-size: 16px;
@@ -121,9 +197,18 @@ export default {
   cursor: pointer;
 }
 .action-button.matching-button {
-  background-color: #4caf50;
+  background-color: #2196f3;
 }
 .action-button.chatroom-button {
   background-color: #2196f3;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

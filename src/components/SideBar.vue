@@ -88,7 +88,7 @@ export default {
         { category_idx: 4, category_name: "금융/경제", icon: "iconEconomy" },
         {
           category_idx: 5,
-          category_name: "성장/자기관리",
+          category_name: "성장/관리",
           icon: "iconImprovement",
         },
         { category_idx: 6, category_name: "예술/취미", icon: "iconArt" },
@@ -132,12 +132,12 @@ a {
   background-color: white;
   display: block;
   padding: 16px;
-  border-radius: 8px; /* 링크도 둥글게 */
+  border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 a:hover {
-  background-color: #ddefff33; /* 호버 시 배경색 변경 */
+  background-color: #ddefff33;
 }
 
 ul {
@@ -149,7 +149,6 @@ ul {
 li {
   margin-bottom: 10px;
 }
-/* 커스텀 스크롤바 만들기 */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -177,9 +176,9 @@ li {
   left: 0;
   top: 0;
   transition: width 0.3s ease;
-  padding: 20px 10px; /* padding 추가 */
+  padding: 20px 10px;
   justify-content: center; /* 사이드바 안의 항목들을 세로로 중앙 정렬 */
-  align-items: center; /* 좌우 중앙 정렬 */
+  align-items: center;
   overflow-y: auto;
 }
 
@@ -190,7 +189,7 @@ li {
 .menu-list {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 메뉴 리스트 전체가 세로로 중앙에 위치 */
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin-top: 0;
@@ -206,14 +205,14 @@ li {
   text-align: left;
   margin-bottom: 20px;
   padding: 10px;
-  border-radius: 8px; /* 둥근 모서리 */
+  border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
   color: black;
 }
 
 .menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* 호버 시 배경색 변경 */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .menu-title {
@@ -227,14 +226,14 @@ li {
   transition: background-color 0.3s ease;
 }
 .menu-title:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* 호버 시 배경색 변경 */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .sub-menu {
   font-size: 16px;
-  margin-left: 20px; /* 하위 메뉴 들여쓰기 */
+  margin-left: 20px;
   padding-left: 10px;
-  border-left: 2px solid rgba(255, 255, 255, 0.2); /* 트리 메뉴를 구분하는 선 */
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
   text-align: left;
 }
 

@@ -65,6 +65,14 @@ const routes = [
         name: "questions",
         component: QuestionsPage,
         props: true,
+        beforeEnter: (to, from, next) => {
+          if (!store.state.isLoggedIn) {
+            alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+            next({ name: "Login" });
+          } else {
+            next();
+          }
+        },
       },
     ],
   },

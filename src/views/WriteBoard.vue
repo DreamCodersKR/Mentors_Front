@@ -134,7 +134,7 @@ h2 {
 .image-btn {
   padding: 10px 20px;
   margin: 0 10px;
-  background-color: #b3c4fc;
+  background-color: #4f46e5;
   color: white;
   border: none;
   border-radius: 5px;
@@ -144,7 +144,7 @@ h2 {
 
 .submit-btn:hover,
 .image-btn:hover {
-  background-color: #96a9f5;
+  background-color: #4338ca;
 }
 
 .image-btn {

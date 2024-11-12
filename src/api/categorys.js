@@ -1,8 +1,8 @@
 import apiClient from "./index";
 
-export function fetchQuestions(categoryId, userType) {
+export function fetchCategorys(categoryId) {
   return apiClient
-    .get(`/questions/category/${categoryId}?mentorYn=${userType}`)
+    .get(`/categories/${categoryId}`)
     .then((response) => response.data)
     .catch((error) => {
       console.error("Error fetching questions:", error);

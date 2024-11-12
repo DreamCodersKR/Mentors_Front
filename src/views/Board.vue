@@ -4,8 +4,14 @@
       <icon-board />
       <h2>자유게시판</h2>
     </div>
+    <div v-if="posts.length === 0" class="no-posts">
+      <div class="no-posts-content">
+        <PenSquare class="no-posts-icon" />
+        <p>게시글이 없습니다. 첫 번째 글을 작성해보세요!</p>
+      </div>
+    </div>
 
-    <ul class="post-list">
+    <ul v-else class="post-list">
       <li v-for="post in posts" :key="post.boardIdx" class="post-item">
         <img
           v-if="post.img == null"
@@ -56,23 +62,25 @@
 import iconBoard from "@/components/icons/iconBoard.vue";
 import { mapState } from "vuex";
 import { getBoardList } from "@/api/board";
+import { PenSquare } from "lucide-vue-next";
 
 export default {
   name: "BoardPage",
   components: {
     iconBoard,
+    PenSquare,
   },
   data() {
     return {
       posts: [],
-      currentPage: 1, // 현재페이지 1일때,
-      totalPages: 1, // 총 페이지 수가 4일때,
+      currentPage: 1,
+      totalPages: 1,
     };
   },
   computed: {
     ...mapState({
       isLoggedIn: (state) => state.isLoggedIn,
-      userNickname: (state) => state.user.nickName, // 사용자 닉네임 추가 접근
+      userNickname: (state) => state.user.nickName,
     }),
   },
   methods: {
@@ -89,7 +97,6 @@ export default {
     },
     changePage(page) {
       this.currentPage = page;
-      // 페이지 변경에 따라 posts 데이터를 다시 불러올 수도 있음
       this.loadPosts();
     },
     changeTimeStamp(timestamp) {
@@ -113,7 +120,7 @@ export default {
     },
   },
   created() {
-    this.loadPosts(); // 컴포넌트가 생성될 때 게시글 목록 로드함
+    this.loadPosts();
   },
 };
 </script>
@@ -135,11 +142,10 @@ export default {
 .boardImg {
   width: 160px;
   height: 200px;
-  margin-right: 10px;
-  display: inline-block;
   margin-right: 15px;
   cursor: pointer;
 }
+
 .post-wrap {
   flex: 1;
 }
@@ -150,13 +156,54 @@ h2 {
   margin-left: 5px;
 }
 
+.no-posts {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.no-posts-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-posts-icon {
+  width: 64px;
+  height: 64px;
+  color: #4f46e5;
+  margin-bottom: 20px;
+}
+
+.no-posts p {
+  font-size: 18px;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
 button[type="button"].write-button {
   padding: 10px 20px;
-  background-color: #333;
+  background-color: #4f46e5;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"].write-button:hover {
+  background-color: #4338ca;
 }
 
 .post-list {
@@ -212,11 +259,12 @@ button[type="button"].write-button {
   justify-content: space-between;
   margin-top: 20px;
 }
+
 .pagination div {
   display: flex;
   justify-content: center;
-  flex: 1; /* 중앙 정렬 고정 */
-  align-items: center; /* 버튼위아래 안늘어나게 고정 */
+  flex: 1;
+  align-items: center;
 }
 
 .pagination button {
@@ -228,7 +276,7 @@ button[type="button"].write-button {
 }
 
 .pagination button.active {
-  background-color: #333;
+  background-color: #4f46e5;
   color: white;
 }
 </style>
