@@ -1,6 +1,9 @@
 <template>
   <div class="category-detail-container">
-    <h2 class="category-title">{{ categoryTitle }}</h2>
+    <div class="category-title-container">
+      <component :is="iconComponent" class="category-icon"></component>
+      <h2 class="category-title">{{ categoryTitle }}</h2>
+    </div>
     <div class="subcategories">
       <button
         v-for="subCategory in subCategories"
@@ -33,6 +36,7 @@
           <textarea
             class="question-input"
             :placeholder="question.placeholder"
+            v-model="question.responseContent"
           ></textarea>
         </div>
       </div>
@@ -41,9 +45,9 @@
     <button
       v-if="userType === 'N' && selectedSubCategory"
       class="action-button matching-button"
-      @click="submitMatching"
+      @click="submitResponses"
     >
-      멘티등록
+      매칭요청
     </button>
     <button
       v-else-if="userType === 'Y' && selectedSubCategory"
@@ -59,6 +63,14 @@
 import { mapState } from "vuex";
 import { fetchCategorys } from "@/api/categorys";
 import { fetchQuestions } from "@/api/questions";
+import { saveResponse } from "@/api/responses";
+import iconEducation from "@/components/icons/iconEducation.vue";
+import iconCarrier from "@/components/icons/iconCarrier.vue";
+import iconIT from "@/components/icons/iconIT.vue";
+import iconEconomy from "@/components/icons/iconEconomy.vue";
+import iconImprovement from "@/components/icons/iconImprovement.vue";
+import iconArt from "@/components/icons/iconArt.vue";
+import iconEtc from "@/components/icons/iconEtc.vue";
 
 export default {
   name: "QuestionsPage",
@@ -72,11 +84,34 @@ export default {
       questions: [],
     };
   },
+  components: {
+    iconEducation,
+    iconCarrier,
+    iconIT,
+    iconEconomy,
+    iconImprovement,
+    iconArt,
+    iconEtc,
+  },
 
   computed: {
     ...mapState({
       userType: (state) => state.user.mentorYn,
+      userEmail: (state) => state.user.userEmail,
     }),
+    iconComponent() {
+      // categoryIdx 값에 따라 렌더링할 아이콘 컴포넌트를 동적으로 반환
+      const iconMap = {
+        1: "iconEducation",
+        2: "iconCarrier",
+        3: "iconIT",
+        4: "iconEconomy",
+        5: "iconImprovement",
+        6: "iconArt",
+        7: "iconEtc",
+      };
+      return iconMap[this.categoryIdx] || "iconEtc"; // 기본 아이콘은 iconEtc
+    },
   },
 
   created() {
@@ -89,9 +124,7 @@ export default {
       this.selectedSubCategory = subCategory;
       await this.loadQuestions(subCategory.subCategoryIdx);
     },
-    submitMatching() {
-      alert("매칭 요청이 완료되었습니다!");
-    },
+
     createChatroom() {
       alert("멘토링 채팅방이 생성되었습니다!");
     },
@@ -116,8 +149,29 @@ export default {
         const data = await fetchQuestions(this.categoryIdx, this.userType); // API 호출
         this.questions = data;
       } catch (error) {
-        alert("카테고리를 불러오는 데 실패했습니다.");
+        alert("질문지를 불러오는 데 실패했습니다.");
         console.error(error);
+      }
+    },
+    async submitResponses() {
+      try {
+        const responseDto = {
+          userEmail: this.userEmail,
+          responseType: this.userType,
+          questions: this.questions.map((question) => ({
+            parentCategoryId: this.categoryIdx,
+            subCategoryName: this.selectedSubCategory.subCategoryName,
+            biosTitle: question.questionContent,
+            questionIdx: question.questionIdx,
+            responseContent: question.responseContent, // 사용자 입력
+          })),
+        };
+
+        const result = await saveResponse(responseDto);
+        alert("응답이 성공적으로 저장되었습니다!");
+        console.log("Saved response ID:", result);
+      } catch (error) {
+        alert("응답 저장에 실패했습니다. 다시 시도해주세요.");
       }
     },
   },
@@ -131,11 +185,24 @@ export default {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
+
+.category-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
 .category-title {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
 }
 .subcategories {
   display: flex;
