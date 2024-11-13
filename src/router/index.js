@@ -10,6 +10,8 @@ import PremiumPage from "@/views/Premium.vue";
 import WriteBoardPage from "@/views/WriteBoard.vue";
 import BoardDetailPage from "@/views/BoardDetail.vue";
 import QuestionsPage from "@/views/Questions.vue";
+import ChatListPage from "@/views/ChatList.vue";
+import MatchingPage from "@/views/MatchingList.vue";
 import store from "@/store";
 
 const routes = [
@@ -31,6 +33,16 @@ const routes = [
         path: "test",
         name: "Test",
         component: TestPage,
+      },
+      {
+        path: "chatList",
+        name: "chatList",
+        component: ChatListPage,
+      },
+      {
+        path: "matcingList",
+        name: "matcingList",
+        component: MatchingPage,
       },
       {
         path: "board",
