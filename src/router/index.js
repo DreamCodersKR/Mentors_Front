@@ -11,6 +11,8 @@ import WriteBoardPage from "@/views/WriteBoard.vue";
 import BoardDetailPage from "@/views/BoardDetail.vue";
 import QuestionsPage from "@/views/Questions.vue";
 import store from "@/store";
+import chat from "@/views/chat.vue";
+
 
 const routes = [
   {
@@ -73,6 +75,11 @@ const routes = [
             next();
           }
         },
+      },
+      {
+        path: "chat",
+        name: "chat",
+        component: chat,
       },
     ],
   },
