@@ -52,7 +52,7 @@
     <button
       v-else-if="userType === 'Y' && selectedSubCategory"
       class="action-button chatroom-button"
-      @click="createChatroom"
+      @click="submitResponses"
     >
       멘토등록
     </button>
@@ -124,7 +124,9 @@ export default {
       this.selectedSubCategory = subCategory;
       await this.loadQuestions(subCategory.subCategoryIdx);
     },
-
+    goToHome() {
+      this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
+    },
     createChatroom() {
       alert("멘토링 채팅방이 생성되었습니다!");
     },
@@ -167,9 +169,9 @@ export default {
           })),
         };
 
-        const result = await saveResponse(responseDto);
+        await saveResponse(responseDto);
         alert("응답이 성공적으로 저장되었습니다!");
-        console.log("Saved response ID:", result);
+        this.goToHome();
       } catch (error) {
         alert("응답 저장에 실패했습니다. 다시 시도해주세요.");
       }
