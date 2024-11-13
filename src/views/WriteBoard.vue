@@ -2,7 +2,7 @@
   <div class="write-board-container">
     <div @click="goToBoard" class="board-title">
       <icon-board />
-      <h2>자유게시판</h2>
+      <h2>멘토링후기</h2>
     </div>
     <input
       type="text"
