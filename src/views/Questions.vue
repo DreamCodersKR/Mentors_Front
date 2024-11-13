@@ -52,7 +52,7 @@
     <button
       v-else-if="userType === 'Y' && selectedSubCategory"
       class="action-button chatroom-button"
-      @click="createChatroom"
+      @click="submitResponses"
     >
       멘토등록
     </button>
@@ -64,6 +64,7 @@ import { mapState } from "vuex";
 import { fetchCategorys } from "@/api/categorys";
 import { fetchQuestions } from "@/api/questions";
 import { saveResponse } from "@/api/responses";
+import axios from "axios"; // axios 추가 임포트
 import iconEducation from "@/components/icons/iconEducation.vue";
 import iconCarrier from "@/components/icons/iconCarrier.vue";
 import iconIT from "@/components/icons/iconIT.vue";
@@ -124,7 +125,9 @@ export default {
       this.selectedSubCategory = subCategory;
       await this.loadQuestions(subCategory.subCategoryIdx);
     },
-
+    goToHome() {
+      this.$router.push("/"); // 로고를 클릭하면 홈으로 이동
+    },
     createChatroom() {
       alert("멘토링 채팅방이 생성되었습니다!");
     },
@@ -153,6 +156,20 @@ export default {
         console.error(error);
       }
     },
+    async recommendMentor() {
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:5000/recommend_mentor",
+          {
+            mentee_email: this.userEmail,
+          }
+        );
+        alert(`매칭멘토 : ${response.data.mentor_name}`);
+      } catch (error) {
+        console.error("멘토 추천 오류: ", error);
+      }
+    },
+
     async submitResponses() {
       try {
         const responseDto = {
@@ -167,9 +184,13 @@ export default {
           })),
         };
 
+        // 응답 저장
         const result = await saveResponse(responseDto);
         alert("응답이 성공적으로 저장되었습니다!");
         console.log("Saved response ID:", result);
+
+        // 저장 후 멘토 추천 요청
+        await this.recommendMentor();
       } catch (error) {
         alert("응답 저장에 실패했습니다. 다시 시도해주세요.");
       }

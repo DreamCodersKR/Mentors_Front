@@ -28,13 +28,13 @@
           </transition>
         </li>
         <li class="menu-item">
-          <router-link to="/test"><iconChatting />채팅목록</router-link>
+          <router-link to="/chatList"><iconChatting />채팅목록</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/board"><iconBoard />자유게시판</router-link>
+          <router-link to="/matcingList"><iconAbout />매칭목록</router-link>
         </li>
         <li class="menu-item">
-          <router-link to="/about"><iconAbout />About</router-link>
+          <router-link to="/board"><iconBoard />멘토링후기</router-link>
         </li>
       </ul>
     </div>

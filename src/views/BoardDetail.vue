@@ -2,7 +2,7 @@
   <div class="board-detail-container">
     <div class="board-top" @click="goToBoard">
       <icon-board />
-      <h2>자유게시판</h2>
+      <h2>멘토링후기</h2>
     </div>
     <!-- 게시글 상단 정보 -->
     <div class="board-header">

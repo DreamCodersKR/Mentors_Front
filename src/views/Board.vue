@@ -2,7 +2,7 @@
   <div class="board-container">
     <div class="board-title">
       <icon-board />
-      <h2>자유게시판</h2>
+      <h2>멘토링후기</h2>
     </div>
     <div v-if="posts.length === 0" class="no-posts">
       <div class="no-posts-content">
